@@ -4,7 +4,7 @@ import { useCallback } from "react";
 export const usePagination = () => {
     /* 画像データへのパス一部（サブディレクトリで機能させるにはディレクトリパスの記述が必要になります）*/
     const imgpath: string = '/public/catalog-img/catalog_all_page_';
-    // const imgpath: string = '/サブディレクトリ/catalog-img/catalog_all_page_';
+    // const imgpath: string = '/サブディレクトリ-XXX/サブディレクトリ-YYY/catalog-img/catalog_all_page_';
 
     /* 画像データの拡張子 */
     const extendsType: string = 'jpg';
