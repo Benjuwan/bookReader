@@ -11,7 +11,7 @@
 - 家族や友人たちとの思い出の写真を残すデジタルプライベートアルバムとして
 
 ## 使い方
-- ファイルダウンロード後に `git install` して `npm run dev` で起動します。調整し終えてビルドする際は`npm run build`してください。※ 使用許可は不要です。改変も自由にしてください。
+- ファイルダウンロード後に `git install` して `npm run dev` で起動します。※ 使用許可は不要です。改変も自由にしてください。
 - 対象ドキュメントが**縦書き（右開き）**の場合
 PageComponents.tsx の `const verticalWritingMode: boolean = false;` の値を `true`に変更してください。
 
@@ -38,7 +38,11 @@ PageComponents.tsx の `const verticalWritingMode: boolean = false;` の値を `
 - 数値以外受け付けず、1 〜 最終ページ番号の範囲内で機能：useGetPagerNum.ts の `GetPagerNum`メソッド
 
 ## 使用時に調整が必要な箇所
-- 特定のディレクトリに格納する場合<br />
+- ビルド時（`npm run build`）の注意事項<br />
+usePagination.ts 内の プライベートメソッド `_setImgSrc` を使用しない場合はコメントアウトにして無効化しておく<br />
+usePagination.ts 内の `const imgpath: string = '/サブディレクトリ/catalog-img/catalog_all_page_';`の値を調整する（サブディレクトリで機能させるにはディレクトリパスの記述が必要）
+
+- 特定のディレクトリ or サブディレクトリに格納する場合<br />
 vite.config.ts の `base:` 箇所にパスを指定<br />
 例：example ディレクトリ内の book-reader ディレクトリ下に置く場合<br />
 `base: '/example/book-reader',`

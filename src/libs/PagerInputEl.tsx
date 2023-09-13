@@ -33,7 +33,7 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
     }
 
     const inputTxtEl: HTMLInputElement | null = useMemo(() => {
-        return document.querySelector('input[type="text"]');
+        return document.querySelector('input[type="tel"]');
     }, [isInputTxt]);
 
     return (
@@ -49,7 +49,7 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
                     ScrollTop();
                 }
             }}>
-            <label htmlFor="pagerInputTxt">「ページ番号を入力」→「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。<input id="pagerInputTxt" type="text" value={isInputTxt}
+            <label htmlFor="pagerInputTxt">「ページ番号を入力」→「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。<input id="pagerInputTxt" type="tel" value={isInputTxt}
                 onInput={
                     (el: ChangeEvent<HTMLInputElement>) => getPagerNum(el)
                 }
@@ -68,7 +68,7 @@ font-size: 14px;
     cursor: default;
     margin: .5em auto;
 
-    & input[type="text"] {
+    & input[type="tel"] {
         display: block;
         border: 1px solid #969696;
         border-radius: 0;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { memo, useState } from "react";
 /* 最初のページの画像パス（※ナンバリングの先頭に 0 or 00 などが付く場合は調整が必要）*/
-import firstPageImgSrc from '../src/assets/catalog-img/catalog_all_page_1.jpg';
+import firstPageImgSrc from '../public/catalog-img/catalog_all_page_1.jpg';
 import { useToggleClass } from "./hook/useToggleClass";
 import { usePagination } from "./hook/usePagination";
 import { FirstPage } from "./libs/FirstPage";
@@ -24,7 +24,7 @@ export const PageComponents = memo(() => {
     const { ToggleClass } = useToggleClass();
     const { PrevPage, NextPage } = usePagination();
 
-    const pagerSpeed: number = 250;
+    const pagerSpeed: number = 150;
 
     return (
         <PageComponentsEl>
