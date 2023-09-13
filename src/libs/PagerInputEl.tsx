@@ -49,11 +49,14 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
                     ScrollTop();
                 }
             }}>
-            <label htmlFor="pagerInputTxt">「ページ番号を入力」→「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。<input id="pagerInputTxt" type="tel" value={isInputTxt}
+            <label htmlFor="pagerInputTxt">
+                <p>「ページ番号を入力」→「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。</p>
+                <input id="pagerInputTxt" type="tel" value={isInputTxt}
                 onInput={
                     (el: ChangeEvent<HTMLInputElement>) => getPagerNum(el)
                 }
                 placeholder="移動したいページ番号を入力してください" />
+                <input type="submit" value="移動" />
             </label>
         </PagerInputElWrapper>
     );
@@ -63,22 +66,51 @@ const PagerInputElWrapper = styled.form`
 font-size: 14px;
 
 & label {
-    display: block;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 2%;
     line-height: 1.6;
     cursor: default;
     margin: .5em auto;
 
-    & input[type="tel"] {
-        display: block;
-        border: 1px solid #969696;
-        border-radius: 0;
-        padding-left: 1em;
-        line-height: 1.8;
-        width: clamp(320px, calc(100vw / 3), 640px);
-        margin: .5em auto 0;
+    & p {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    & input {
+        &[type="tel"]{
+            width: clamp(240px, 100%, 480px);
+            text-align: left;
+            border: 1px solid #969696;
+            border-radius: 0;
+            padding-left: 1em;
+            line-height: 1.8;
+            margin: .5em auto;
+        }
+
+        &[type="submit"]{
+            width: clamp(80px, 100%, 480px);
+            border: none;
+            border-radius: 2px;
+            line-height: 44px;
+            letter-spacing: .25em;
+            color: #fff;
+            background-color: #969696;
+        }
 
         @media screen and (min-width: 700px) {
             font-size: 16px;
+
+            &[type="tel"]{
+                width: 78%;
+                margin: 0;
+            }
+
+            &[type="submit"]{
+                width: 20%;
+            }
         }
     }
 }
