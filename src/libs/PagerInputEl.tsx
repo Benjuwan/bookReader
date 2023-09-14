@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { ChangeEvent, FC, memo, useCallback, useMemo } from "react";
-import { useGetPagerNum } from "../hook/useGetPagerNum";
+import { useCheckCorrectNum } from "../hook/useCheckCorrectNum";
 import { useSetInputPagerNumber } from "../hook/useSetInputPagerNumber";
 
 type pagerInputElType = {
     lastPageNum: number;
-    isInputTxt: string;
-    setInputTxt: React.Dispatch<React.SetStateAction<string>>;
+    isInputTxt: string | number;
+    setInputTxt: React.Dispatch<React.SetStateAction<string | number>>;
     setPageNum: (isPageNumEl: number) => void;
     PrevPage: (isPageNumEl: number) => string;
     NextPage: (isPageNumEl: number) => string;
@@ -16,9 +16,9 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
     const { lastPageNum, isInputTxt, setInputTxt, setPageNum, PrevPage, NextPage } = props;
 
     /* 入力内容が数値かつ適正範囲内かどうか判定 */
-    const { GetPagerNum } = useGetPagerNum();
-    const getPagerNum = useCallback((el: ChangeEvent<HTMLInputElement>) => {
-        GetPagerNum(el, lastPageNum, setInputTxt);
+    const { CheckCorrectNum } = useCheckCorrectNum();
+    const checkCorrectNum = useCallback((el: ChangeEvent<HTMLInputElement>) => {
+        CheckCorrectNum(el, lastPageNum);
     }, [isInputTxt]);
 
     /* ページ数指定でページ移動 */
@@ -33,13 +33,10 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
     }
 
     const inputTxtEl: HTMLInputElement | null = useMemo(() => {
-        return document.querySelector('input[type="tel"]');
+        return document.querySelector('input[type="text"]');
     }, [isInputTxt]);
 
     return (
-        /** 
-         * #pagerInputTxt の focusout でページャー処理を行いたかったが、onFocusOut が現状無い（onFocus はある）ので form の submit イベントで処理実行
-        */
         <PagerInputElWrapper action="" onSubmit={
             (formEl: ChangeEvent<HTMLFormElement>) => {
                 formEl.preventDefault();
@@ -51,11 +48,18 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
             }}>
             <label htmlFor="pagerInputTxt">
                 <p>「ページ番号を入力」→「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。</p>
-                <input id="pagerInputTxt" type="tel" value={isInputTxt}
-                onInput={
-                    (el: ChangeEvent<HTMLInputElement>) => getPagerNum(el)
-                }
-                placeholder="移動したいページ番号を入力してください" />
+                <input id="pagerInputTxt" type="text" value={isInputTxt}
+                    onInput={
+                        (el: ChangeEvent<HTMLInputElement>) => {
+                            checkCorrectNum(el);
+
+                            /* lastPageNum 以上の数値は入力不可 */
+                            if (Number(el.target.value) <= lastPageNum) {
+                                setInputTxt(el.target.value);
+                            }
+                        }
+                    }
+                    placeholder="移動したいページ番号を入力してください" />
                 <input type="submit" value="移動" />
             </label>
         </PagerInputElWrapper>
@@ -64,6 +68,11 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
 
 const PagerInputElWrapper = styled.form`
 font-size: 14px;
+margin: auto;
+
+@media screen and (min-width: 700px) {
+    width: clamp(160px, calc(100vw/2), 480px);
+}
 
 & label {
     display: flex;
@@ -80,8 +89,8 @@ font-size: 14px;
     }
 
     & input {
-        &[type="tel"]{
-            width: clamp(240px, 100%, 480px);
+        &[type="text"]{
+            width: clamp(240px, 100%, 400px);
             text-align: left;
             border: 1px solid #969696;
             border-radius: 0;
@@ -91,7 +100,7 @@ font-size: 14px;
         }
 
         &[type="submit"]{
-            width: clamp(80px, 100%, 480px);
+            width: clamp(80px, 100%, 400px);
             border: none;
             border-radius: 2px;
             line-height: 44px;
@@ -103,7 +112,7 @@ font-size: 14px;
         @media screen and (min-width: 700px) {
             font-size: 16px;
 
-            &[type="tel"]{
+            &[type="text"]{
                 width: 78%;
                 margin: 0;
             }

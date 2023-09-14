@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { memo, useState } from "react";
+import { memo, useLayoutEffect, useState } from "react";
 /* 最初のページの画像パス（※ナンバリングの先頭に 0 or 00 などが付く場合は調整が必要）*/
 import firstPageImgSrc from '../public/catalog-img/catalog_all_page_1.jpg';
 import { useToggleClass } from "./hook/useToggleClass";
@@ -9,6 +9,7 @@ import { FinalPage } from "./libs/FinalPage";
 import { MultiPages } from "./libs/MultiPages";
 import { PageNumberViewEl } from "./libs/PageNumberViewEl";
 import { GetOtherFile } from "./libs/GetOtherFile";
+import { SinglePage } from "./libs/SinglePage";
 
 export const PageComponents = memo(() => {
     const lastPageNum: number = 100;
@@ -26,10 +27,17 @@ export const PageComponents = memo(() => {
 
     const pagerSpeed: number = 150;
 
+    /* ブラウザ幅（デバイス別）による表示切替のため、useLayoutEffect でレンダリング前にブラウザ幅を確認 */
+    const [isViewPortWidth, setViewPortWidth] = useState<number>(0);
+    useLayoutEffect(() => {
+        setViewPortWidth(window.innerWidth);
+    }, []);
+
+
     return (
         <PageComponentsEl>
-            <div className="multiPageWrapper">
-                {
+            <div className={`multiPageWrapper ${isViewPortWidth >= 700 ? 'largeDisplayView' : 'singlePageView'}`}>
+                {isViewPortWidth >= 700 ?
                     (isPageNum <= 1 || isPageNum >= lastPageNum) ?
                         <>
                             {isPageNum <= 1 &&
@@ -65,7 +73,18 @@ export const PageComponents = memo(() => {
                             NextPage={NextPage}
                             ToggleClass={ToggleClass}
                             thePostsPagination={thePostsPagination}
-                        />
+                        /> :
+                    <SinglePage
+                        verticalWritingMode={verticalWritingMode}
+                        pagerSpeed={pagerSpeed}
+                        isPageNum={isPageNum}
+                        lastPageNum={lastPageNum}
+                        firstPageImgSrc={firstPageImgSrc}
+                        documentTitle={documentTitle}
+                        PrevPage={PrevPage}
+                        ToggleClass={ToggleClass}
+                        thePostsPagination={thePostsPagination}
+                    />
                 }
             </div>
             <PageNumberViewEl
@@ -73,6 +92,7 @@ export const PageComponents = memo(() => {
                 isPageNum={isPageNum}
                 setPageNum={setPageNum}
                 lastPageNum={lastPageNum}
+                isViewPortWidth={isViewPortWidth}
             />
             <GetOtherFile />
         </PageComponentsEl>
@@ -80,7 +100,7 @@ export const PageComponents = memo(() => {
 });
 
 const PageComponentsEl = styled.div`
-width: clamp(320px,calc(100vw/2),640px);
+width: clamp(320px, 100%, 1200px);
 margin: 2.5em auto;
 /* 親要素に「perspective」の指定。子要素にも適用。※ 子要素（例：<img>）のみを3D変形する際には「transform: perspective(数値)」を指定。 */
 perspective: 1000px;
@@ -90,10 +110,13 @@ perspective: 1000px;
     justify-content: center;
     margin: auto;
     padding: 16px;
-    width: clamp(160px, calc(100vw/2), 640px);
     
-    @media screen and (min-width: 700px) {
-        width: clamp(320px, calc(100vw/2), 640px);
+    &.singlePageView {
+        width: clamp(160px, 100%, 400px);
+    }
+
+    &.largeDisplayView {
+        width: clamp(400px, calc(100vw/2), 640px);
     }
 
     & .imgEls{
