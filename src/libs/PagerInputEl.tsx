@@ -67,7 +67,6 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
 });
 
 const PagerInputElWrapper = styled.form`
-font-size: 14px;
 margin: auto;
 
 @media screen and (min-width: 700px) {
@@ -110,8 +109,6 @@ margin: auto;
         }
 
         @media screen and (min-width: 700px) {
-            font-size: 16px;
-
             &[type="text"]{
                 width: 78%;
                 margin: 0;
