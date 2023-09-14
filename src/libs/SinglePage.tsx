@@ -22,20 +22,22 @@ export const SinglePage: FC<singlePageType> = memo((props) => {
         targetImg = document.querySelector('.singlePageImg');
     }, [isPageNum]);
 
+    
     return (
         <SinglePageWrapper>
-            {/* 前ページボタン */}
+            {/* 前ページボタン（verticalWritingMode true の場合は 次ページボタン）*/}
             <button type="button" className="prevSide" onClick={() => {
                 /* 三項演算子 or AND/OR演算子で複数行処理を行いたい場合は、フラグメントを使うとともにそれぞれの処理を {} で囲ってやる */
-                isPageNum > 1 &&
+                verticalWritingMode ?
+                    isPageNum < lastPageNum &&
                     <>
-                        {verticalWritingMode ?
-                            /* targetImg && ：このAND演算子が無いと targetImg が null だという警告が入る */
-                            targetImg && ToggleClass(targetImg, 'paginateNext') : targetImg && ToggleClass(targetImg, 'paginatePrev')}
-                        {setTimeout(() => {
-                            verticalWritingMode ? thePostsPagination(1) : thePostsPagination(-1)
-                        }, pagerSpeed)
-                        }
+                        {targetImg && ToggleClass(targetImg, 'paginatePrev')}
+                        {setTimeout(() => thePostsPagination(1), pagerSpeed)}
+                    </> :
+                    isPageNum > 1 &&
+                    <>
+                        {targetImg && ToggleClass(targetImg, 'paginatePrev')}
+                        {setTimeout(() => thePostsPagination(-1), pagerSpeed)}
                     </>
             }}>&nbsp;</button>
 
@@ -50,14 +52,18 @@ export const SinglePage: FC<singlePageType> = memo((props) => {
                     `${documentTitle}の画像 - ${isPageNum}ページ目`
             } />
 
-            {/* 次ページボタン */}
+            {/* 次ページボタン（verticalWritingMode true の場合は 前ページボタン）*/}
             <button type="button" className="nextSide" onClick={() => {
-                isPageNum < lastPageNum &&
+                verticalWritingMode ?
+                    isPageNum > 1 &&
                     <>
-                        {verticalWritingMode ? targetImg && ToggleClass(targetImg, 'paginatePrev') : targetImg && ToggleClass(targetImg, 'paginateNext')}
-                        {setTimeout(() => {
-                            verticalWritingMode ? thePostsPagination(-1) : thePostsPagination(1)
-                        }, pagerSpeed)}
+                        {targetImg && ToggleClass(targetImg, 'paginateNext')}
+                        {setTimeout(() => thePostsPagination(-1), pagerSpeed)}
+                    </> :
+                    isPageNum < lastPageNum &&
+                    <>
+                        {targetImg && ToggleClass(targetImg, 'paginateNext')}
+                        {setTimeout(() => thePostsPagination(1), pagerSpeed)}
                     </>
             }}>&nbsp;</button>
         </SinglePageWrapper>
