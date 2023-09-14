@@ -52,17 +52,14 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                         </div> :
                         <div className={`pagerEls ${isEdit ? 'isEditTrue' : 'isEditFalse'}`} onClick={editMode}>
                             {verticalWritingMode ?
-                                <>{lastPageNum} / <span>{isPageNum + 1}</span> - <span>{isPageNum}</span></> :
+                                <><span>{isPageNum + 1}</span> - <span>{isPageNum}</span> / {lastPageNum}</> :
                                 <><span>{isPageNum}</span> - <span>{isPageNum + 1}</span> / {lastPageNum}</>
                             }
                         </div>
                     }
                 </> :
                 <div className={`pagerEls ${isEdit ? 'isEditTrue' : 'isEditFalse'}`} onClick={editMode}>
-                    {verticalWritingMode ?
-                        <>{lastPageNum} / <span>{isPageNum}</span></> :
-                        <><span>{isPageNum}</span> / {lastPageNum}</>
-                    }
+                    <span>{isPageNum}</span> / {lastPageNum}
                 </div>
             }
             {isEdit &&
