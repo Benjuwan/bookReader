@@ -1,4 +1,4 @@
-import { FC, memo, useLayoutEffect } from "react";
+import { FC, memo, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 
 type singlePageType = {
@@ -16,13 +16,14 @@ type singlePageType = {
 export const SinglePage: FC<singlePageType> = memo((props) => {
     const { verticalWritingMode, pagerSpeed, isPageNum, lastPageNum, documentTitle, firstPageImgSrc, PrevPage, ToggleClass, thePostsPagination } = props;
 
-    /* useLayoutEffect でレンダリング前に要素（targetImg：.singlePageImg）を認知させておくことで最初のページにも class付与（ページめくり）の処理を反映 */
-    let targetImg: HTMLImageElement | null = null;
+    /* useLayoutEffect でレンダリング前に要素（targetImgEl：.singlePageImg）を認知させておくことで最初のページにも class付与（ページめくり）の処理を反映 */
+    const [isImgEl, setImgEl] = useState<HTMLImageElement | null>(null);
     useLayoutEffect(() => {
-        targetImg = document.querySelector('.singlePageImg');
+        const targetImgEl: HTMLImageElement | null = document.querySelector('.singlePageImg');
+        setImgEl(targetImgEl);
     }, [isPageNum]);
 
-    
+
     return (
         <SinglePageWrapper>
             {/* 前ページボタン（verticalWritingMode true の場合は 次ページボタン）*/}
@@ -31,12 +32,12 @@ export const SinglePage: FC<singlePageType> = memo((props) => {
                 verticalWritingMode ?
                     isPageNum < lastPageNum &&
                     <>
-                        {targetImg && ToggleClass(targetImg, 'paginatePrev')}
+                        {isImgEl && ToggleClass(isImgEl, 'paginatePrev')}
                         {setTimeout(() => thePostsPagination(1), pagerSpeed)}
                     </> :
                     isPageNum > 1 &&
                     <>
-                        {targetImg && ToggleClass(targetImg, 'paginatePrev')}
+                        {isImgEl && ToggleClass(isImgEl, 'paginatePrev')}
                         {setTimeout(() => thePostsPagination(-1), pagerSpeed)}
                     </>
             }}>&nbsp;</button>
@@ -57,12 +58,12 @@ export const SinglePage: FC<singlePageType> = memo((props) => {
                 verticalWritingMode ?
                     isPageNum > 1 &&
                     <>
-                        {targetImg && ToggleClass(targetImg, 'paginateNext')}
+                        {isImgEl && ToggleClass(isImgEl, 'paginateNext')}
                         {setTimeout(() => thePostsPagination(-1), pagerSpeed)}
                     </> :
                     isPageNum < lastPageNum &&
                     <>
-                        {targetImg && ToggleClass(targetImg, 'paginateNext')}
+                        {isImgEl && ToggleClass(isImgEl, 'paginateNext')}
                         {setTimeout(() => thePostsPagination(1), pagerSpeed)}
                     </>
             }}>&nbsp;</button>
