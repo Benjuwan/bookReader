@@ -5,15 +5,10 @@
 - サンプルドキュメントとして、<a href="https://security-portal.nisc.go.jp/" target="_blank">内閣サイバーセキュリティセンター（NISC）</a>が制作した「インターネットの安全・安心ハンドブック」を使用させていただいております。<br />webに親しまれていない方や子どもでも分かりやすいようにイラストも多めですし、平易な文章で説明されているのでサイバーセキュリティの意識付けに対する敷居が低く感じられる内容です。<br />BookReader（当ファイル）では、サンプルドキュメントのため一部の画像（100ページまで）しか扱っていませんが PDF は全ページ閲覧できるようになっています。<br />今後も更新されていく可能性があるため以下のリンクを定期的にチェックして確認してみてください。<br />
 <a href="https://security-portal.nisc.go.jp/guidance/handbook.html" target="_blank">インターネットの安全・安心ハンドブック - NISC</a>
 
-<div style="display: flex; gap: 2%;justify-content: center;">
-
-・大きいディスプレイver <br />
+- （左）大きいディスプレイver、（右）スマートフォンver <br />
 ![大きいディスプレイver](readmeimg/gif-001.gif "hero")
-
-・スマートフォンver <br />
 ![スマートフォンver](readmeimg/gif-002.gif "hero")
 
-</div>
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧
