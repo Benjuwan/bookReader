@@ -47,7 +47,7 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
                 }
             }}>
             <label htmlFor="pagerInputTxt">
-                <p>「ページ番号を入力」→「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。</p>
+                <p>「ページ番号を入力」→<br />「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。</p>
                 <input id="pagerInputTxt" type="text" value={isInputTxt}
                     onInput={
                         (el: ChangeEvent<HTMLInputElement>) => {

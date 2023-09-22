@@ -1,6 +1,6 @@
 export const useToggleClass = () => {
     /* PageComponents.tsx の CSS：.paginate の アニメーション時間 */
-    const paginateAnimationTime:number = 250;
+    const paginateAnimationTime: number = 250;
 
     const ToggleClass = (
         targetEl: HTMLElement,
