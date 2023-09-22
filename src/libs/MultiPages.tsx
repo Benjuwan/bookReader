@@ -16,30 +16,34 @@ export const MultiPages: FC<pageProps> = memo((props) => {
 
     return (
         <>
-            <img
-                className={`imgEls multiPages ${verticalWritingMode ? 'nextPage' : 'prevPage'}`}
-                src={verticalWritingMode ? NextPage(isPageNum) : PrevPage(isPageNum)}
-                alt={`${documentTitle}の画像 - ${verticalWritingMode ? isPageNum + 1 : isPageNum}ページ目`}
-                onClick={(elm) => {
-                    ToggleClass(elm.currentTarget, 'paginatePrev');
-                    setTimeout(() => {
-                        {
-                            verticalWritingMode ? thePostsPagination(2) : thePostsPagination(-2)
-                        }
-                    }, pagerSpeed);
-                }} />
-            <img
-                className={`imgEls multiPages ${verticalWritingMode ? 'prevPage' : 'nextPage'}`}
-                src={verticalWritingMode ? PrevPage(isPageNum) : NextPage(isPageNum)}
-                alt={`${documentTitle}の画像 - ${verticalWritingMode ? isPageNum : isPageNum + 1}ページ目`}
-                onClick={(elm) => {
-                    ToggleClass(elm.currentTarget, 'paginateNext');
-                    setTimeout(() => {
-                        {
-                            verticalWritingMode ? thePostsPagination(-2) : thePostsPagination(2)
-                        }
-                    }, pagerSpeed);
-                }} />
+            <button onClick={(elm) => {
+                ToggleClass(elm.currentTarget, 'paginatePrev');
+                setTimeout(() => {
+                    {
+                        verticalWritingMode ? thePostsPagination(2) : thePostsPagination(-2)
+                    }
+                }, pagerSpeed);
+            }} >
+                <img
+                    className={`imgEls multiPages ${verticalWritingMode ? 'nextPage' : 'prevPage'}`}
+                    src={verticalWritingMode ? NextPage(isPageNum) : PrevPage(isPageNum)}
+                    alt={`${documentTitle}の画像 - ${verticalWritingMode ? isPageNum + 1 : isPageNum}ページ目`}
+                />
+            </button>
+            <button onClick={(elm) => {
+                ToggleClass(elm.currentTarget, 'paginateNext');
+                setTimeout(() => {
+                    {
+                        verticalWritingMode ? thePostsPagination(-2) : thePostsPagination(2)
+                    }
+                }, pagerSpeed);
+            }} >
+                <img
+                    className={`imgEls multiPages ${verticalWritingMode ? 'prevPage' : 'nextPage'}`}
+                    src={verticalWritingMode ? PrevPage(isPageNum) : NextPage(isPageNum)}
+                    alt={`${documentTitle}の画像 - ${verticalWritingMode ? isPageNum : isPageNum + 1}ページ目`}
+                />
+            </button>
         </>
     );
 });

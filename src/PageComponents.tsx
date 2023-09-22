@@ -116,20 +116,38 @@ perspective: 1000px;
     }
 
     &.largeDisplayView {
-        width: clamp(400px, calc(100vw/2), 640px);
+        width: clamp(400px, 100%, 1080px);
     }
 
-    & .imgEls{
-        display: block;
+    & button {
+        appearance: none;
+        border-radius: 0;
+        border: none;
+        background-color: transparent;
         cursor: pointer;
-        transform: rotateY(0deg);
-        
-        &:hover{
-            transition: filter .25s;
-            filter: brightness(.75);
+        width: 100%;
+
+        &:hover {
+            & .imgEls {
+                transition: filter .25s;
+                filter: brightness(.75);
+            }
         }
 
-        &.paginateNext{
+        & .imgEls {
+            display: block;
+            object-fit: cover;
+            height: 100%;
+
+            &.singlePage-first,
+            &.singlePage-final {
+                width: calc(100vw/2);
+                max-width: 560px;
+                margin: auto;
+            }
+        }
+
+        &.paginateNext {
             transform-origin: left center;
             animation: paginateNext .25s linear;
 
@@ -161,7 +179,7 @@ perspective: 1000px;
             }
         }
 
-        &.paginatePrev{
+        &.paginatePrev {
             transform-origin: right center;
             animation: paginatePrev .25s linear;
 

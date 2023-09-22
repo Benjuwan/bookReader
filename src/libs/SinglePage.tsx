@@ -16,6 +16,11 @@ type singlePageType = {
 export const SinglePage: FC<singlePageType> = memo((props) => {
     const { verticalWritingMode, pagerSpeed, isPageNum, lastPageNum, documentTitle, firstPageImgSrc, PrevPage, ToggleClass, thePostsPagination } = props;
 
+    /**
+     * SinglePage.tsx（スマートフォン用のコンポーネント）は 1ページ表示仕様なのでページ送り用の button 要素を2つ用意して画像の半々で分割しているので他のページとは異なる処理方法（*1）になっている。
+     * *1：ページ画像のStateを用意したり、ページ画像に直接アニメーションclass を付与したり
+    */
+
     /* useLayoutEffect でレンダリング前に要素（targetImgEl：.singlePageImg）を認知させておくことで最初のページにも class付与（ページめくり）の処理を反映 */
     const [isImgEl, setImgEl] = useState<HTMLImageElement | null>(null);
     useLayoutEffect(() => {
@@ -80,7 +85,7 @@ position: relative;
     border: none;
     border-radius: 0;
     background-color: transparent;
-    width: 50%;
+    width: 50%!important;
     height: 100%;
     position: absolute;
     top: 50%;
@@ -88,7 +93,7 @@ position: relative;
     z-index: 1;
 
     &:hover{
-        background-color: rgba(0,0,0,.025);
+        background-color: rgba(0,0,0,.015);
     }
 }
 & .prevSide {
@@ -96,5 +101,75 @@ position: relative;
 }
 & .nextSide {
     right: 0;
+}
+
+& .singlePageImg {
+    transform: rotateY(0deg);
+    object-fit: unset;
+    height: auto;
+
+    &.paginateNext {
+        transform-origin: left center;
+        animation: paginateNext .25s linear;
+
+        @keyframes paginateNext {
+            0%{
+                transform: rotateY(-8deg);
+                filter: brightness(1);
+            }
+
+            25%{
+                transform: rotateY(-28deg);
+                filter: brightness(1);
+            }
+
+            50%{
+                transform: rotateY(-48deg);
+                filter: brightness(1);
+            }
+
+            75%{
+                transform: rotateY(-68deg);
+                filter: brightness(.5);
+            }
+
+            100%{
+                transform: rotateY(-88deg);
+                filter: brightness(.25);
+            }
+        }
+    }
+
+    &.paginatePrev {
+        transform-origin: right center;
+        animation: paginatePrev .25s linear;
+
+        @keyframes paginatePrev {
+            0%{
+                transform: rotateY(8deg);
+                filter: brightness(1);
+            }
+
+            25%{
+                transform: rotateY(28deg);
+                filter: brightness(1);
+            }
+
+            50%{
+                transform: rotateY(48deg);
+                filter: brightness(1);
+            }
+
+            75%{
+                transform: rotateY(68deg);
+                filter: brightness(.5);
+            }
+
+            100%{
+                transform: rotateY(88deg);
+                filter: brightness(.25);
+            }
+        }
+    }
 }
 `;
