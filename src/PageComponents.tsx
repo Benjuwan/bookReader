@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { memo, useEffect, useLayoutEffect, useState } from "react";
-/* 最初のページの画像パス（※ナンバリングの先頭に 0 or 00 などが付く場合は調整が必要）*/
-import firstPageImgSrc from '../public/catalog-img/catalog_all_page_1.jpg';
+import { extendsType, imgSrcPath } from "./utils/imgSrcPath";
 import { FirstPage } from "./libs/FirstPage";
 import { FinalPage } from "./libs/FinalPage";
 import { MultiPages } from "./libs/MultiPages";
@@ -14,26 +13,30 @@ import { useToggleClass } from "./hook/useToggleClass";
 import { useWaitLoadingAllImgs } from "./hook/useWaitLoadingAllImgs";
 
 export const PageComponents = memo(() => {
+    /* 最初のページの画像パス（画像データのナンバリング部分を調整）*/
+    const firstPageImgSrc: string = `${imgSrcPath}1.${extendsType}`;
+
     const lastPageNum: number = 100;
     const documentTitle: string = 'ドキュメント XXXX';
+
     /* ドキュメントが縦書き（右開き）の場合は true */
     const verticalWritingMode: boolean = false;
 
-    const [loading, setLoading] = useState<boolean>(false);
+    const pagerSpeed: number = 150;
 
     const [isPageNum, setPageNum] = useState<number>(1);
-    const thePostsPagination = (pageNum: number) => {
-        setPageNum((prevPageNum) => prevPageNum + pageNum);
-    }
+    const [isViewPortWidth, setViewPortWidth] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const { ToggleClass } = useToggleClass();
     const { PrevPage, NextPage } = usePagination();
     const { WaitLoadingAllImgs } = useWaitLoadingAllImgs();
 
-    const pagerSpeed: number = 150;
+    const thePostsPagination: (pageNum: number) => void = (pageNum: number) => {
+        setPageNum((prevPageNum) => prevPageNum + pageNum);
+    }
 
     /* ブラウザ幅（デバイス別）による表示切替のため、useLayoutEffect でレンダリング前にブラウザ幅を確認 */
-    const [isViewPortWidth, setViewPortWidth] = useState<number>(0);
     useLayoutEffect(() => {
         setViewPortWidth(window.innerWidth);
     }, []);
