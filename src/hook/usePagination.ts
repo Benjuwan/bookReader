@@ -10,7 +10,7 @@ export const usePagination = () => {
     const extendsType: string = 'jpg';
 
     /* 画像データ名のナンバリング部分が「001 ~ 009」「010 ~ 099」「100 ~ 」という形の場合に使用する関数（プライベートメソッド）*/
-    // const _setImgSrc = (
+    // const _setImgSrc: (pageNum: number, adjustNum: number) => string = (
     //     pageNum: number,
     //     adjustNum: number
     // ) => {
@@ -25,13 +25,13 @@ export const usePagination = () => {
     // }
 
     /* 前ページ */
-    const PrevPage = useCallback((pageNum: number) => {
+    const PrevPage: (pageNum: number) => string = useCallback((pageNum: number) => {
         // return _setImgSrc(pageNum, 0);
         return `${location.origin}${imgpath}${pageNum}.${extendsType}`;
     }, []);
 
     /* 次ページ */
-    const NextPage = useCallback((pageNum: number) => {
+    const NextPage: (pageNum: number) => string = useCallback((pageNum: number) => {
         // return _setImgSrc(pageNum, 1);
         return `${location.origin}${imgpath}${pageNum + 1}.${extendsType}`;
     }, []);

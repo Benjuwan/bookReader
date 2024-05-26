@@ -22,7 +22,7 @@
 - react@18.2.0
 - styled-components@6.0.7
 - typescript@5.2.2
-- vite@4.5.3
+- vite@4.4.9
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧
@@ -51,9 +51,9 @@
     - 最初のページの画像パスの指定（※ナンバリングの先頭に 0 or 00 などが前置する場合）<br />
         - `import firstPageImgSrc` 部分で指定している画像データのナンバリング部分を調整
 
-- `usePagination.ts`の以下を調整
-    - `usePagination.ts`内の `const imgpath: string = '/サブディレクトリ/catalog-img/catalog_all_page_';`の値を調整する（サブディレクトリで機能させるにはディレクトリパスの記述が必要）
-    - 【任意】画像データファイルのナンバリング先頭に 0 or 00 などが前置する場合は、`usePagination.ts`内の プライベートメソッド `_setImgSrc` を使用する。そうでない場合はコメントアウトして無効化しておく（現状コメントアウト）
+- `usePagination.ts`と`useWaitLoadingAllImgs.ts`の以下を調整
+    - `const imgpath: string = '/サブディレクトリ/catalog-img/catalog_all_page_';`の値を調整する（サブディレクトリで機能させるにはディレクトリパスの記述が必要）
+    - 【任意】画像データファイルのナンバリング先頭に 0 or 00 などが前置する場合は、プライベートメソッド `_setImgSrc` を使用する。そうでない場合はコメントアウトして無効化しておく（現状コメントアウト）
 
 ## 補足事項
 - 仕組み
