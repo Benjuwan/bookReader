@@ -30,7 +30,7 @@ height: calc(100vh - 5em); // 親の main（PageComponents.tsx）で margin: 2.5
     overflow: hidden;
     letter-spacing: .25em;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 16px;
     line-height: 2;
     position: fixed;
     top: 50%;
