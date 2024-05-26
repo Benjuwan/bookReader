@@ -1,5 +1,5 @@
-import { FC, memo, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
+import { FC, memo, useLayoutEffect, useState } from "react";
 
 type singlePageType = {
     verticalWritingMode: boolean;
