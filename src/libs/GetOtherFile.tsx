@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { memo } from "react";
-import setFileContent from '../../src/assets/catalog_all.pdf';
+import setFileContent from '../../src/assets/document.pdf';
 
 export const GetOtherFile = memo(() => {
     const fileName: string = 'PDFファイル';
