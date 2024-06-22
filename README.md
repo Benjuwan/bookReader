@@ -54,9 +54,9 @@
         - `firstPageImgSrc` 部分で指定している画像データのナンバリング部分を調整
 
 - `usePagination.ts`と`useWaitLoadingAllImgs.ts`の以下を調整
-    - 【任意】画像データファイルのナンバリング先頭に 0 or 00 などが前置する場合は、プライベートメソッド `_setImgSrc` を使用する。そうでない場合はコメントアウトして無効化しておく（現状コメントアウト）
+    - 【任意】画像データファイルのナンバリング先頭に 0 or 00 などが前置する場合は`useSetImgSrc.ts`（`src\hook\useSetImgSrc.ts`）カスタムフックを使用する（当該カスタムフックは現状コメントアウト）
 
-- 【任意】`GetOtherFile.tsx`の以下を調整
+- 【任意】`GetOtherFile.tsx`（`src\libs\GetOtherFile.tsx`）の以下を調整
     - カタログやマニュアルなど対象ファイルに応じて、`setFileContent`のpdfファイル名を変更（デフォルトは`document.pdf`）
 
 ## 補足事項
