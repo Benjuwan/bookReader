@@ -26,12 +26,11 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
     /* クリックでのページ移動 */
     const { PrevPage, NextPage } = usePagination();
 
-
     return (
         <PageNumberViewWrapper>
             {isViewPortWidth >= 700 ?
                 <>
-                    {isPageNum <= 1 || isPageNum >= lastPageNum ?
+                    {isPageNum <= 1 || isPageNum === lastPageNum ?
                         <div className={`pagerEls ${isEdit ? 'isEditTrue' : 'isEditFalse'}`} onClick={editMode}>
                             {isPageNum <= 1 &&
                                 <>
@@ -41,14 +40,7 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                                     }
                                 </>
                             }
-                            {isPageNum >= lastPageNum &&
-                                <>
-                                    {isPageNum === lastPageNum ?
-                                        <span>{isPageNum}</span> :
-                                        <span>{isPageNum - 1}</span>
-                                    }
-                                </>
-                            } / {lastPageNum}
+                            {isPageNum === lastPageNum && <span>{lastPageNum}</span>} / {lastPageNum}
                         </div> :
                         <div className={`pagerEls ${isEdit ? 'isEditTrue' : 'isEditFalse'}`} onClick={editMode}>
                             {verticalWritingMode ?
@@ -59,7 +51,12 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                     }
                 </> :
                 <div className={`pagerEls ${isEdit ? 'isEditTrue' : 'isEditFalse'}`} onClick={editMode}>
-                    <span>{isPageNum}</span> / {lastPageNum}
+                    <>
+                        {isPageNum === 0 ?
+                            <span>{isPageNum + 1}</span> :
+                            <span>{isPageNum}</span>
+                        }
+                    </> / {lastPageNum}
                 </div>
             }
             {isEdit &&
