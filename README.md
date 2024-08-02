@@ -10,19 +10,19 @@
 ![スマートフォンver](readmeimg/gif-002.gif "hero")
 
 ## 技術構成
-- @types/react-dom@18.2.7
-- @types/react@18.2.21
-- @typescript-eslint/eslint-plugin@6.6.0
-- @typescript-eslint/parser@6.6.0
-- @vitejs/plugin-react@4.0.4
-- eslint-plugin-react-hooks@4.6.0
-- eslint-plugin-react-refresh@0.4.3
-- eslint@8.48.0
-- react-dom@18.2.0
-- react@18.2.0
-- styled-components@6.0.7
-- typescript@5.2.2
-- vite@4.4.9
+- @types/react-dom@18.3.0
+- @types/react@18.3.3
+- @typescript-eslint/eslint-plugin@6.21.0
+- @typescript-eslint/parser@6.21.0
+- @vitejs/plugin-react@4.3.1
+- eslint-plugin-react-hooks@4.6.2
+- eslint-plugin-react-refresh@0.4.9
+- eslint@8.57.0
+- react-dom@18.3.1
+- react@18.3.1
+- styled-components@6.1.12
+- typescript@5.5.4
+- vite@4.5.3
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧
@@ -54,7 +54,7 @@
         - `firstPageImgSrc` 部分で指定している画像データのナンバリング部分を調整
 
 - `usePagination.ts`と`useWaitLoadingAllImgs.ts`の以下を調整
-    - 【任意】画像データファイルのナンバリング先頭に 0 or 00 などが前置する場合は`useSetImgSrc.ts`（`src\hook\useSetImgSrc.ts`）カスタムフックを使用する（当該カスタムフックは現状コメントアウト）
+    - 【任意】画像データファイルのナンバリング先頭に 0 or 00 などが前置する場合（例：画像データ名のナンバリング部分が「001 ~ 009」「010 ~ 099」「100 ~ 」という形）は`useSetImgSrc.ts`（`src\hook\useSetImgSrc.ts`）カスタムフックを使用する（当該カスタムフックは現状コメントアウト）
 
 - 【任意】`GetOtherFile.tsx`（`src\libs\GetOtherFile.tsx`）の以下を調整
     - カタログやマニュアルなど対象ファイルに応じて、`setFileContent`のpdfファイル名を変更（デフォルトは`document.pdf`）
