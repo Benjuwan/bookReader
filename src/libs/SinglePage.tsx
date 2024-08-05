@@ -27,7 +27,7 @@ export const SinglePage: FC<singlePageType> = memo((props) => {
         /* 最初のページにも class付与（ページめくり）の処理を反映 */
         const targetImgEl: HTMLImageElement | null = document.querySelector('.singlePageImg');
         setImgEl(targetImgEl);
-    }, [firstPageImgSrc, isPageNum]);
+    }, [isPageNum]);
 
     return (
         <SinglePageWrapper>
