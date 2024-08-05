@@ -43,15 +43,13 @@
     base: '/example/book-reader',
     ```
 
-- `imgSrcPath.ts`で画像パス（`imgSrcPath`）と拡張子（`extendsType`）の設定を調整
+- `imgSrcPath.ts`で以下を調整
+    - 画像パス（`imgSrcPath`）と、必要に応じて拡張子（`extendsType`）の設定を調整
 
-- `PageComponents.tsx`の以下を調整
-    - 最後のページ番号とコンテンツ名を指定
-        - `const lastPageNum: number = 最後のページ番号（コンテンツの画像データの最大ナンバー）;`
-        - `const documentTitle: string = 'コンテンツ名を指定';`
-        - 【任意】ドキュメントが縦書き（右開き）の場合は`verticalWritingMode`を`true`にする
-    - 最初のページの画像パスの指定（※ナンバリングの先頭に 0 or 00 などが前置する場合）
-        - `firstPageImgSrc` 部分で指定している画像データのナンバリング部分を調整
+- `PageComponents.tsx`で最後のページ番号とコンテンツ名を指定
+    - `const lastPageNum: number = 最後のページ番号（コンテンツの画像データの最大ナンバー）;`
+    - `const documentTitle: string = 'コンテンツ名を指定';`
+    - 【任意】ドキュメントが縦書き（右開き）の場合は`verticalWritingMode`を`true`にする
 
 - `usePagination.ts`と`useWaitLoadingAllImgs.ts`の以下を調整
     - 【任意】画像データファイルのナンバリング先頭に 0 or 00 などが前置する場合（例：画像データ名のナンバリング部分が「001 ~ 009」「010 ~ 099」「100 ~ 」という形）は`useSetImgSrc.ts`（`src\hook\useSetImgSrc.ts`）カスタムフックを使用する（当該カスタムフックは現状コメントアウト）
