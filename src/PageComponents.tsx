@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { memo, useEffect, useLayoutEffect, useState } from "react";
-import { extendsType, imgSrcPath } from "./utils/imgSrcPath";
 import { FirstPage } from "./libs/FirstPage";
 import { FinalPage } from "./libs/FinalPage";
 import { MultiPages } from "./libs/MultiPages";
@@ -13,9 +12,6 @@ import { useToggleClass } from "./hook/useToggleClass";
 import { useWaitLoadingAllImgs } from "./hook/useWaitLoadingAllImgs";
 
 export const PageComponents = memo(() => {
-    /* 最初のページの画像パス（画像データのナンバリング部分を調整）*/
-    const firstPageImgSrc: string = `${imgSrcPath}1.${extendsType}`;
-
     const lastPageNum: number = 100;
     const documentTitle: string = 'ドキュメント XXXX';
 
@@ -43,7 +39,17 @@ export const PageComponents = memo(() => {
 
     /* 全画像の読込を監視 */
     useEffect(() => {
-        WaitLoadingAllImgs(lastPageNum, setLoading);
+        setLoading(true);
+
+        WaitLoadingAllImgs(lastPageNum);
+
+        const firstPageImg: HTMLImageElement | null = document.querySelector('.wrapperSec img');
+        firstPageImg?.addEventListener('load', () => setLoading(false));
+
+        /* useEffect のクリーンアップ処理 */
+        return () => {
+            firstPageImg?.removeEventListener('load', () => setLoading(false));
+        }
     }, []);
 
     return (
@@ -59,7 +65,6 @@ export const PageComponents = memo(() => {
                                             verticalWritingMode={verticalWritingMode}
                                             pagerSpeed={pagerSpeed}
                                             isPageNum={isPageNum}
-                                            firstPageImgSrc={firstPageImgSrc}
                                             documentTitle={documentTitle}
                                             ToggleClass={ToggleClass}
                                             thePostsPagination={thePostsPagination}
@@ -93,7 +98,6 @@ export const PageComponents = memo(() => {
                                 pagerSpeed={pagerSpeed}
                                 isPageNum={isPageNum}
                                 lastPageNum={lastPageNum}
-                                firstPageImgSrc={firstPageImgSrc}
                                 documentTitle={documentTitle}
                                 PrevPage={PrevPage}
                                 ToggleClass={ToggleClass}

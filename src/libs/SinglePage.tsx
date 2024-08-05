@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { FC, memo, useLayoutEffect, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
+import firstPageImgSrc from "../../public/catalog-img/catalog_all_page_1.jpg";
 
 type singlePageType = {
     verticalWritingMode: boolean;
@@ -7,27 +8,26 @@ type singlePageType = {
     isPageNum: number;
     lastPageNum: number;
     documentTitle: string;
-    firstPageImgSrc: string;
     PrevPage: (isPageNum: number) => string;
     ToggleClass: (el: HTMLElement, className: string) => void;
     thePostsPagination: (page: number) => void;
 }
 
 export const SinglePage: FC<singlePageType> = memo((props) => {
-    const { verticalWritingMode, pagerSpeed, isPageNum, lastPageNum, documentTitle, firstPageImgSrc, PrevPage, ToggleClass, thePostsPagination } = props;
+    const { verticalWritingMode, pagerSpeed, isPageNum, lastPageNum, documentTitle, PrevPage, ToggleClass, thePostsPagination } = props;
 
     /**
      * SinglePage.tsx（スマートフォン用のコンポーネント）は 1ページ表示仕様なのでページ送り用の button 要素を2つ用意して画像の半々で分割しているので他のページとは異なる処理方法（*1）になっている。
      * *1：ページ画像のStateを用意したり、ページ画像に直接アニメーションclass を付与したり
     */
 
-    /* useLayoutEffect でレンダリング前に要素（targetImgEl：.singlePageImg）を認知させておくことで最初のページにも class付与（ページめくり）の処理を反映 */
     const [isImgEl, setImgEl] = useState<HTMLImageElement | null>(null);
-    useLayoutEffect(() => {
+
+    useEffect(() => {
+        /* 最初のページにも class付与（ページめくり）の処理を反映 */
         const targetImgEl: HTMLImageElement | null = document.querySelector('.singlePageImg');
         setImgEl(targetImgEl);
-    }, [isPageNum]);
-
+    }, [firstPageImgSrc, isPageNum]);
 
     return (
         <SinglePageWrapper>

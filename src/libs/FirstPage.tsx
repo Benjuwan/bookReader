@@ -1,17 +1,17 @@
 import { FC, memo } from 'react';
+import firstPageImgSrc from "../../public/catalog-img/catalog_all_page_1.jpg";
 
 type pageProps = {
     verticalWritingMode: boolean;
     pagerSpeed: number;
     isPageNum: number;
-    firstPageImgSrc: string;
     documentTitle: string;
     ToggleClass: (el: HTMLElement, className: string) => void;
     thePostsPagination: (page: number) => void;
 }
 
 export const FirstPage: FC<pageProps> = memo((props) => {
-    const { verticalWritingMode, pagerSpeed, isPageNum, firstPageImgSrc, documentTitle, ToggleClass, thePostsPagination } = props;
+    const { verticalWritingMode, pagerSpeed, isPageNum, documentTitle, ToggleClass, thePostsPagination } = props;
 
     return (
         <button onClick={(elm) => {
