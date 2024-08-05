@@ -37,6 +37,8 @@ export const PageComponents = memo(() => {
         setViewPortWidth(window.innerWidth);
     }, []);
 
+    const handleLoad: () => void = () => setLoading(false);
+
     /* 全画像の読込を監視 */
     useEffect(() => {
         setLoading(true);
@@ -44,11 +46,12 @@ export const PageComponents = memo(() => {
         WaitLoadingAllImgs(lastPageNum);
 
         const firstPageImg: HTMLImageElement | null = document.querySelector('.wrapperSec img');
-        firstPageImg?.addEventListener('load', () => setLoading(false));
+        /* 匿名関数を使用するとうまくクリーンアップできない（生成された関数がそれぞれ異なる参照を持つため）ので handleLoad のように参照を共有できる関数を用意しておく。そして、イベントリスナーを設定する際には以下のように関数（の参照）を直接使用する */
+        firstPageImg?.addEventListener('load', handleLoad);
 
         /* useEffect のクリーンアップ処理 */
         return () => {
-            firstPageImg?.removeEventListener('load', () => setLoading(false));
+            firstPageImg?.removeEventListener('load', handleLoad);
         }
     }, []);
 
