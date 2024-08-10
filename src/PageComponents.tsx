@@ -39,12 +39,13 @@ export const PageComponents = memo(() => {
 
     const handleLoad: () => void = () => setLoading(false);
 
-    /* 全画像の読込を監視 */
     useEffect(() => {
         setLoading(true);
 
+        /* 全画像の読込（フェッチ）*/
         WaitLoadingAllImgs(lastPageNum);
 
+        /* 最初の一枚目が読み込まれたタイミングでローディングを解除 */
         const firstPageImg: HTMLImageElement | null = document.querySelector('.wrapperSec img');
         /* 匿名関数を使用するとうまくクリーンアップできない（生成された関数がそれぞれ異なる参照を持つため）ので handleLoad のように参照を共有できる関数を用意しておく。そして、イベントリスナーを設定する際には以下のように関数（の参照）を直接使用する */
         firstPageImg?.addEventListener('load', handleLoad);
