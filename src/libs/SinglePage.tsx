@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FC, memo, useEffect, useState } from "react";
-import firstPageImgSrc from "../../public/catalog-img/catalog_all_page_1.jpg";
+import { extendsType, imgSrcPath } from "../utils/imgSrcPath";
 
 type singlePageType = {
     verticalWritingMode: boolean;
@@ -20,6 +20,8 @@ export const SinglePage: FC<singlePageType> = memo((props) => {
      * SinglePage.tsx（スマートフォン用のコンポーネント）は 1ページ表示仕様なのでページ送り用の button 要素を2つ用意して画像の半々で分割しているので他のページとは異なる処理方法（*1）になっている。
      * *1：ページ画像のStateを用意したり、ページ画像に直接アニメーションclass を付与したり
     */
+
+    const firstPageImgSrc: string = `${location.origin}${imgSrcPath}${isPageNum === 0 ? isPageNum + 1 : isPageNum}.${extendsType}`;
 
     const [isImgEl, setImgEl] = useState<HTMLImageElement | null>(null);
 
