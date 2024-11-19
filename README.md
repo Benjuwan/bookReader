@@ -22,7 +22,7 @@
 - react@18.3.1
 - styled-components@6.1.12
 - typescript@5.5.4
-- vite@4.5.3
+- vite@4.5.5
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧

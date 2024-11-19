@@ -42,7 +42,6 @@ export const PageComponents = memo(() => {
     useEffect(() => {
         setLoading(true);
 
-        /* 全画像の読込（フェッチ）*/
         WaitLoadingAllImgs(lastPageNum);
 
         /* 最初の一枚目が読み込まれたタイミングでローディングを解除 */
