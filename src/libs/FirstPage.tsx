@@ -1,5 +1,5 @@
 import { FC, memo } from 'react';
-import firstPageImgSrc from "../../public/catalog-img/catalog_all_page_1.jpg";
+import { extendsType, imgSrcPath } from '../utils/imgSrcPath';
 
 type pageProps = {
     verticalWritingMode: boolean;
@@ -22,7 +22,7 @@ export const FirstPage: FC<pageProps> = memo((props) => {
                     setTimeout(() => { thePostsPagination(1) }, pagerSpeed)
             }
         }} >
-            <img className="imgEls singlePage-first" src={firstPageImgSrc} alt={
+            <img className="imgEls singlePage-first" src={`${location.origin}${imgSrcPath}${isPageNum === 0 ? isPageNum + 1 : isPageNum}.${extendsType}`} alt={
                 isPageNum === 0 ?
                     `${documentTitle}の画像 - ${isPageNum + 1}ページ目` :
                     `${documentTitle}の画像 - ${isPageNum}ページ目`
