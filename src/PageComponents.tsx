@@ -53,6 +53,7 @@ export const PageComponents = memo(() => {
         return () => {
             firstPageImg?.removeEventListener('load', handleLoad);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

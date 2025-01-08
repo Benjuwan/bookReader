@@ -19,12 +19,14 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
     const { CheckCorrectNum } = useCheckCorrectNum();
     const checkCorrectNum = useCallback((el: ChangeEvent<HTMLInputElement>) => {
         CheckCorrectNum(el, lastPageNum);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isInputTxt]);
 
     /* ページ数指定でページ移動 */
     const { SetInputPagerNumber } = useSetInputPagerNumber();
     const setInputPagerNumber = useCallback(() => {
         SetInputPagerNumber(isInputTxt, lastPageNum, setPageNum, PrevPage, NextPage);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isInputTxt]);
 
     /* スクロールトップ */
@@ -34,6 +36,7 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
 
     const inputTxtEl: HTMLInputElement | null = useMemo(() => {
         return document.querySelector('input[type="text"]');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isInputTxt]);
 
     return (
