@@ -22,7 +22,7 @@
 - react@18.3.1
 - styled-components@6.1.12
 - typescript@5.5.4
-- vite@4.5.5
+- vite@4.5.9
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧
@@ -36,25 +36,25 @@
 `PageComponents.tsx`の `const verticalWritingMode: boolean = false;` の値を `true`に変更してください。
 
 ## ビルド時（`npm run build`）の注意事項
-- 特定のディレクトリ or サブディレクトリに格納する場合
+1. 特定のディレクトリ or サブディレクトリに格納する場合
     - `vite.config.ts`の `base:` 箇所にパスを指定<br />
     例：example ディレクトリ内の book-reader ディレクトリ下に置く場合
     ```
     base: '/example/book-reader',
     ```
 
-- `imgSrcPath.ts`で以下を調整
+2. `imgSrcPath.ts`で以下を調整
     - 画像パス（`imgSrcPath`）と、必要に応じて拡張子（`extendsType`）の設定を調整
 
-- `PageComponents.tsx`で最後のページ番号とコンテンツ名を指定
+3. `PageComponents.tsx`で最後のページ番号とコンテンツ名を指定
     - `const lastPageNum: number = 最後のページ番号（コンテンツの画像データの最大ナンバー）;`
     - `const documentTitle: string = 'コンテンツ名を指定';`
     - 【任意】ドキュメントが縦書き（右開き）の場合は`verticalWritingMode`を`true`にする
 
-- `usePagination.ts`と`useWaitLoadingAllImgs.ts`の以下を調整
+4. `usePagination.ts`と`useWaitLoadingAllImgs.ts`の以下を調整
     - 【任意】画像データファイルのナンバリング先頭に 0 or 00 などが前置する場合（例：画像データ名のナンバリング部分が「001 ~ 009」「010 ~ 099」「100 ~ 」という形）は`useSetImgSrc.ts`（`src\hook\useSetImgSrc.ts`）カスタムフックを使用する（当該カスタムフックは現状コメントアウト）
 
-- 【任意】`GetOtherFile.tsx`（`src\libs\GetOtherFile.tsx`）の以下を調整
+5. 【任意】`GetOtherFile.tsx`（`src\libs\GetOtherFile.tsx`）の以下を調整
     - カタログやマニュアルなど対象ファイルに応じて、`setFileContent`のpdfファイル名を変更（デフォルトは`document.pdf`）
 
 ## 補足事項
