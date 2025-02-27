@@ -14,7 +14,7 @@
 - @types/react@18.3.3
 - @typescript-eslint/eslint-plugin@6.21.0
 - @typescript-eslint/parser@6.21.0
-- @vitejs/plugin-react@4.3.1
+- @vitejs/plugin-react@4.3.4
 - eslint-plugin-react-hooks@4.6.2
 - eslint-plugin-react-refresh@0.4.9
 - eslint@8.57.0
@@ -22,7 +22,7 @@
 - react@18.3.1
 - styled-components@6.1.12
 - typescript@5.5.4
-- vite@4.5.9
+- vite@6.2.0
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧
