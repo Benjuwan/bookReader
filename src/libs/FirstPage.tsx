@@ -23,7 +23,7 @@ export const FirstPage: FC<EachPageType> = memo((props) => {
 
     return (
         <button onClick={handleNext} >
-            <img className="block object-cover h-full duration-250 hover:filter hover:brightness-75 w-1/2 max-w-[30rem] mx-auto lg:max-w-[1280px] lg:min-h-[800px]"
+            <img className="block object-cover h-full duration-250 hover:filter hover:brightness-75 w-1/2 max-w-[30rem] mx-auto lg:max-w-[1280px] lg:min-h-[640px]"
                 src={`${location.origin}${imgSrcPath}${isPageNum === 0 ?
                     isPageNum + 1 : isPageNum}.${extendsType}`
                 }
