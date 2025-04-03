@@ -1,32 +1,37 @@
-import { FC, memo } from 'react';
+import { FC, memo, SyntheticEvent } from 'react';
 import { extendsType, imgSrcPath } from '../utils/imgSrcPath';
+import { EachPageType } from '../PageComponents';
+import { usePagination } from '../hook/usePagination';
 
-type pageProps = {
-    verticalWritingMode: boolean;
-    pagerSpeed: number;
-    isPageNum: number;
-    documentTitle: string;
-    ToggleClass: (el: HTMLElement, className: string) => void;
-    thePostsPagination: (page: number) => void;
-}
+export const FirstPage: FC<EachPageType> = memo((props) => {
+    const { verticalWritingMode, pagerSpeed, isPageNum, documentTitle, thePostsPagination } = props;
 
-export const FirstPage: FC<pageProps> = memo((props) => {
-    const { verticalWritingMode, pagerSpeed, isPageNum, documentTitle, ToggleClass, thePostsPagination } = props;
+    const { nextAction } = usePagination();
+
+    const handleNext: (e: SyntheticEvent<HTMLButtonElement>) => void = (e: SyntheticEvent<HTMLButtonElement>) => {
+        const nextAction_core: () => void = () => {
+            if (isPageNum === 0) {
+                thePostsPagination(2);
+            }
+            thePostsPagination(1);
+        }
+
+        const specificClassName: string | undefined = verticalWritingMode ? 'paginatePrev' : undefined;
+
+        nextAction(e, pagerSpeed, nextAction_core, specificClassName);
+    }
 
     return (
-        <button onClick={(elm) => {
-            ToggleClass(elm.currentTarget, `${verticalWritingMode ? 'paginatePrev' : 'paginateNext'}`);
-            {
-                isPageNum === 0 ?
-                    setTimeout(() => { thePostsPagination(2) }, pagerSpeed) :
-                    setTimeout(() => { thePostsPagination(1) }, pagerSpeed)
-            }
-        }} >
-            <img className="imgEls singlePage-first" src={`${location.origin}${imgSrcPath}${isPageNum === 0 ? isPageNum + 1 : isPageNum}.${extendsType}`} alt={
-                isPageNum === 0 ?
-                    `${documentTitle}の画像 - ${isPageNum + 1}ページ目` :
-                    `${documentTitle}の画像 - ${isPageNum}ページ目`
-            }
+        <button onClick={handleNext} >
+            <img className="block object-cover h-full duration-250 hover:filter hover:brightness-75 w-1/2 max-w-[30rem] mx-auto lg:max-w-[1280px] lg:min-h-[800px]"
+                src={`${location.origin}${imgSrcPath}${isPageNum === 0 ?
+                    isPageNum + 1 : isPageNum}.${extendsType}`
+                }
+                alt={
+                    isPageNum === 0 ?
+                        `${documentTitle}の画像 - ${isPageNum + 1}ページ目` :
+                        `${documentTitle}の画像 - ${isPageNum}ページ目`
+                }
             />
         </button>
     );

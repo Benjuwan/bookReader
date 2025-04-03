@@ -1,45 +1,54 @@
-import { FC, memo } from 'react';
+import { FC, memo, SyntheticEvent } from 'react';
+import { EachPageType } from '../PageComponents';
+import { usePagination } from '../hook/usePagination';
 
-type pageProps = {
-    verticalWritingMode: boolean;
-    pagerSpeed: number;
-    isPageNum: number;
-    documentTitle: string;
-    PrevPage: (isPageNum: number) => string;
-    NextPage: (isPageNum: number) => string;
-    ToggleClass: (el: HTMLElement, className: string) => void;
-    thePostsPagination: (page: number) => void;
-}
+export const MultiPages: FC<EachPageType> = memo((props) => {
+    const { verticalWritingMode, pagerSpeed, isPageNum, documentTitle, thePostsPagination } = props;
 
-export const MultiPages: FC<pageProps> = memo((props) => {
-    const { verticalWritingMode, pagerSpeed, isPageNum, documentTitle, PrevPage, NextPage, ToggleClass, thePostsPagination } = props;
+    const { PrevPage, NextPage, prevAction, nextAction } = usePagination();
+
+    const handlePrev: (e: SyntheticEvent<HTMLButtonElement>) => void = (e: SyntheticEvent<HTMLButtonElement>) => {
+        const prevAction_core: () => void = () => {
+            if (verticalWritingMode) {
+                thePostsPagination(2);
+                return; // ページネーション後は（当スコープ内で）処理終了
+            }
+            thePostsPagination(-2);
+        }
+
+        prevAction(e, pagerSpeed, prevAction_core);
+    }
+
+    const handleNext: (e: SyntheticEvent<HTMLButtonElement>) => void = (e: SyntheticEvent<HTMLButtonElement>) => {
+        const nextAction_core: () => void = () => {
+            if (verticalWritingMode) {
+                thePostsPagination(-2);
+                return; // ページネーション後は（当スコープ内で）処理終了
+            }
+            thePostsPagination(2);
+        }
+
+        nextAction(e, pagerSpeed, nextAction_core);
+    }
 
     return (
         <>
-            <button onClick={(elm) => {
-                ToggleClass(elm.currentTarget, 'paginatePrev');
-                setTimeout(() => {
-                    {
-                        verticalWritingMode ? thePostsPagination(2) : thePostsPagination(-2)
-                    }
-                }, pagerSpeed);
-            }} >
+            <button
+                className="appearance-none rounded-none border-0 bg-transparent cursor-pointer w-full"
+                onClick={handlePrev}
+            >
                 <img
-                    className={`imgEls multiPages ${verticalWritingMode ? 'nextPage' : 'prevPage'}`}
+                    className={`useSetInputPagerNumber_prevPage block object-cover h-full duration-250 hover:filter hover:brightness-75 ${verticalWritingMode ? 'origin-left' : 'origin-right'}`}
                     src={verticalWritingMode ? NextPage(isPageNum) : PrevPage(isPageNum)}
                     alt={`${documentTitle}の画像 - ${verticalWritingMode ? isPageNum + 1 : isPageNum}ページ目`}
                 />
             </button>
-            <button onClick={(elm) => {
-                ToggleClass(elm.currentTarget, 'paginateNext');
-                setTimeout(() => {
-                    {
-                        verticalWritingMode ? thePostsPagination(-2) : thePostsPagination(2)
-                    }
-                }, pagerSpeed);
-            }} >
+            <button
+                className="appearance-none rounded-none border-0 bg-transparent cursor-pointer w-full"
+                onClick={handleNext}
+            >
                 <img
-                    className={`imgEls multiPages ${verticalWritingMode ? 'prevPage' : 'nextPage'}`}
+                    className={`useSetInputPagerNumber_prevPage block object-cover h-full duration-250 hover:filter hover:brightness-75 ${verticalWritingMode ? 'origin-right' : 'origin-left'}`}
                     src={verticalWritingMode ? PrevPage(isPageNum) : NextPage(isPageNum)}
                     alt={`${documentTitle}の画像 - ${verticalWritingMode ? isPageNum : isPageNum + 1}ページ目`}
                 />

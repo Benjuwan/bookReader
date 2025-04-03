@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { ChangeEvent, FC, memo, useCallback, useMemo } from "react";
 import { useCheckCorrectNum } from "../hook/useCheckCorrectNum";
 import { useSetInputPagerNumber } from "../hook/useSetInputPagerNumber";
@@ -8,24 +7,29 @@ type pagerInputElType = {
     isInputTxt: string | number;
     setInputTxt: React.Dispatch<React.SetStateAction<string | number>>;
     setPageNum: (isPageNumEl: number) => void;
-    PrevPage: (isPageNumEl: number) => string;
-    NextPage: (isPageNumEl: number) => string;
 }
 
 export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
-    const { lastPageNum, isInputTxt, setInputTxt, setPageNum, PrevPage, NextPage } = props;
+    const { lastPageNum, isInputTxt, setInputTxt, setPageNum } = props;
 
-    /* 入力内容が数値かつ適正範囲内かどうか判定 */
     const { CheckCorrectNum } = useCheckCorrectNum();
-    const checkCorrectNum = useCallback((el: ChangeEvent<HTMLInputElement>) => {
+    const { SetInputPagerNumber } = useSetInputPagerNumber();
+
+    const handleInputEntry = useCallback((el: ChangeEvent<HTMLInputElement>) => {
+        /* 入力内容が数値かつ適正範囲内かどうか判定 */
         CheckCorrectNum(el, lastPageNum);
+
+        /* lastPageNum 以上の数値は入力不可 */
+        if (Number(el.target.value) <= lastPageNum) {
+            setInputTxt(el.target.value);
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isInputTxt]);
 
     /* ページ数指定でページ移動 */
-    const { SetInputPagerNumber } = useSetInputPagerNumber();
     const setInputPagerNumber = useCallback(() => {
-        SetInputPagerNumber(isInputTxt, lastPageNum, setPageNum, PrevPage, NextPage);
+        SetInputPagerNumber(isInputTxt, lastPageNum, setPageNum);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isInputTxt]);
 
@@ -39,88 +43,26 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isInputTxt]);
 
-    return (
-        <PagerInputElWrapper action="" onSubmit={
-            (formEl: ChangeEvent<HTMLFormElement>) => {
-                formEl.preventDefault();
-                if (inputTxtEl && inputTxtEl.value.length > 0) {
-                    setInputPagerNumber();
-                    setInputTxt('');
-                    ScrollTop();
-                }
-            }}>
-            <label htmlFor="pagerInputTxt">
-                <p>「ページ番号を入力」→<br />「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。</p>
-                <input id="pagerInputTxt" type="text" value={isInputTxt}
-                    onInput={
-                        (el: ChangeEvent<HTMLInputElement>) => {
-                            checkCorrectNum(el);
+    const submitAction: (formEl: ChangeEvent<HTMLFormElement>) => void = (formEl: ChangeEvent<HTMLFormElement>) => {
+        formEl.preventDefault();
+        if (inputTxtEl && inputTxtEl.value.length > 0) {
+            setInputPagerNumber();
+            setInputTxt('');
+            ScrollTop();
+        }
+    }
 
-                            /* lastPageNum 以上の数値は入力不可 */
-                            if (Number(el.target.value) <= lastPageNum) {
-                                setInputTxt(el.target.value);
-                            }
-                        }
-                    }
-                    placeholder="移動したいページ番号を入力してください" />
-                <input type="submit" value="移動" />
+    return (
+        <form action="" className="my-0 mx-auto md:w-[clamp(160px,calc(100vw/2),480px)]" onSubmit={submitAction}>
+            <label htmlFor="pagerInputTxt" className="flex flex-row flex-wrap justify-center gap-[2%] leading-[2em] my-[0.5em] mx-auto">
+                <p className="w-full mb-[1em]">「ページ番号を入力」→<br />「エンターキー押下」でページ移動<br />※ 数値以外は入力できません。</p>
+                <input id="pagerInputTxt" className="block w-[clamp(15rem,100%,25rem)] border border-[#969696] rounded-none pl-[1em] leading-[1.8] my-[0.5em] mx-auto md:w-[78%]" type="text" value={isInputTxt} onInput={handleInputEntry} placeholder="移動したいページ番号を入力してください" />
+                <input
+                    type="submit"
+                    value="移動"
+                    disabled={isInputTxt.toString().length === 0}
+                    className="w-[clamp(5rem,100%,25rem)] border-none rounded-2 leading-[2.75rem] tracking-[0.25em] text-white bg-[#969696] rounded-none leading-[1.8] my-[0.5em] mx-0 not-disabled:cursor-pointer not-disabled:bg-[#1e2939] md:w-[20%]" />
             </label>
-        </PagerInputElWrapper>
+        </form>
     );
 });
-
-const PagerInputElWrapper = styled.form`
-margin: auto;
-
-@media screen and (min-width: 700px) {
-    width: clamp(160px, calc(100vw/2), 480px);
-}
-
-& label {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    gap: 2%;
-    line-height: 1.6;
-    cursor: default;
-    margin: .5em auto;
-
-    & p {
-        width: 100%;
-        margin-bottom: 1em;
-    }
-
-    & input {
-        &[type="text"]{
-            width: clamp(240px, 100%, 400px);
-            text-align: left;
-            border: 1px solid #969696;
-            border-radius: 0;
-            padding-left: 1em;
-            line-height: 1.8;
-            margin: .5em auto;
-        }
-
-        &[type="submit"]{
-            width: clamp(80px, 100%, 400px);
-            border: none;
-            border-radius: 2px;
-            line-height: 44px;
-            letter-spacing: .25em;
-            color: #fff;
-            background-color: #969696;
-        }
-
-        @media screen and (min-width: 700px) {
-            &[type="text"]{
-                width: 78%;
-                margin: 0;
-            }
-
-            &[type="submit"]{
-                width: 20%;
-            }
-        }
-    }
-}
-`;

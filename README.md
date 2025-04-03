@@ -10,19 +10,21 @@
 ![スマートフォンver](readmeimg/gif-002.gif "hero")
 
 ## 技術構成
-- @types/react-dom@18.3.0
-- @types/react@18.3.3
+- @tailwindcss/postcss@4.1.1
+- @tailwindcss/vite@4.1.1
+- @types/react-dom@18.3.6
+- @types/react@18.3.20
 - @typescript-eslint/eslint-plugin@6.21.0
 - @typescript-eslint/parser@6.21.0
 - @vitejs/plugin-react@4.3.4
 - eslint-plugin-react-hooks@4.6.2
-- eslint-plugin-react-refresh@0.4.9
-- eslint@8.57.0
+- eslint-plugin-react-refresh@0.4.19
+- eslint@8.57.1
 - react-dom@18.3.1
 - react@18.3.1
-- styled-components@6.1.12
-- typescript@5.5.4
-- vite@6.2.0
+- tailwindcss@4.1.1
+- typescript@5.8.2
+- vite@6.2.4
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧
