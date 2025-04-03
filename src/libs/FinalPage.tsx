@@ -19,7 +19,7 @@ export const FinalPage: FC<EachPageType> = memo((props) => {
 
     return (
         <button onClick={handlePrev} >
-            <img className="block object-cover h-full duration-250 hover:filter hover:brightness-75 w-1/2 max-w-[35rem] mx-auto lg:max-w-[1280px] lg:min-h-[800px]"
+            <img className="block object-cover h-full duration-250 hover:filter hover:brightness-75 w-1/2 max-w-[35rem] mx-auto lg:max-w-[1280px] lg:min-h-[640px]"
                 src={typeof lastPageNum !== "undefined" ? PrevPage(lastPageNum) : undefined}
                 alt={`${documentTitle}の画像 - ${isPageNum}ページ目`}
             />
