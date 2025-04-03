@@ -1,25 +1,27 @@
-import { FC, memo } from 'react';
+import { FC, memo, SyntheticEvent } from 'react';
+import { EachPageType } from '../PageComponents';
+import { usePagination } from '../hook/usePagination';
 
-type pageProps = {
-    verticalWritingMode: boolean;
-    pagerSpeed: number;
-    isPageNum: number;
-    lastPageNum: number;
-    documentTitle: string;
-    PrevPage: (isPageNum: number) => string;
-    ToggleClass: (el: HTMLElement, className: string) => void;
-    thePostsPagination: (page: number) => void;
-}
+export const FinalPage: FC<EachPageType> = memo((props) => {
+    const { verticalWritingMode, pagerSpeed, isPageNum, lastPageNum, documentTitle, thePostsPagination } = props;
 
-export const FinalPage: FC<pageProps> = memo((props) => {
-    const { verticalWritingMode, pagerSpeed, isPageNum, lastPageNum, documentTitle, PrevPage, ToggleClass, thePostsPagination } = props;
+    const { PrevPage, prevAction } = usePagination();
+
+    const handlePrev: (e: SyntheticEvent<HTMLButtonElement>) => void = (e: SyntheticEvent<HTMLButtonElement>) => {
+        const prevAction_core: () => void = () => {
+            thePostsPagination(-2);
+        }
+
+        const specificClassName: string | undefined = verticalWritingMode ? 'paginateNext' : undefined;
+
+        prevAction(e, pagerSpeed, prevAction_core, specificClassName);
+    }
 
     return (
-        <button onClick={(elm) => {
-            ToggleClass(elm.currentTarget, `${verticalWritingMode ? 'paginateNext' : 'paginatePrev'}`);
-            setTimeout(() => { thePostsPagination(-2) }, pagerSpeed);
-        }} >
-            <img className="imgEls singlePage-final" src={PrevPage(lastPageNum)} alt={`${documentTitle}の画像 - ${isPageNum}ページ目`}
+        <button onClick={handlePrev} >
+            <img className="block object-cover h-full duration-250 hover:filter hover:brightness-75 w-1/2 max-w-[35rem] mx-auto lg:max-w-[1280px] lg:min-h-[800px]"
+                src={typeof lastPageNum !== "undefined" ? PrevPage(lastPageNum) : undefined}
+                alt={`${documentTitle}の画像 - ${isPageNum}ページ目`}
             />
         </button>
     );

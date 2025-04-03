@@ -1,6 +1,4 @@
-import styled from "styled-components";
 import { FC, memo, useState } from "react";
-import { usePagination } from "../hook/usePagination";
 import { PagerInputEl } from "./PagerInputEl";
 
 type pageProps = {
@@ -9,7 +7,7 @@ type pageProps = {
     setPageNum: (el: number) => void;
     lastPageNum: number;
     isViewPortWidth: number;
-}
+};
 
 export const PageNumberViewEl: FC<pageProps> = memo((props) => {
     const { verticalWritingMode, isPageNum, setPageNum, lastPageNum, isViewPortWidth } = props;
@@ -23,15 +21,14 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
     /* input value */
     const [isInputTxt, setInputTxt] = useState<string | number>('');
 
-    /* クリックでのページ移動 */
-    const { PrevPage, NextPage } = usePagination();
-
     return (
-        <PageNumberViewWrapper>
+        <div className="text-1 text-center py-0 px-1 leading-[2em]">
             {isViewPortWidth >= 700 ?
                 <>
                     {isPageNum <= 1 || isPageNum === lastPageNum ?
-                        <div className={`pagerEls ${isEdit ? 'isEditTrue' : 'isEditFalse'}`} onClick={editMode}>
+                        <div className={`cursor-pointer ${isEdit ?
+                            'hover:opacity-[0.75]' :
+                            'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-[100%] after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
                             {isPageNum <= 1 &&
                                 <>
                                     {isPageNum === 0 ?
@@ -42,7 +39,9 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                             }
                             {isPageNum === lastPageNum && <span>{lastPageNum}</span>} / {lastPageNum}
                         </div> :
-                        <div className={`pagerEls ${isEdit ? 'isEditTrue' : 'isEditFalse'}`} onClick={editMode}>
+                        <div className={`cursor-pointer ${isEdit ?
+                            'hover:opacity-[0.75]' :
+                            'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-[100%] after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
                             {verticalWritingMode ?
                                 <><span>{isPageNum + 1}</span> - <span>{isPageNum}</span> / {lastPageNum}</> :
                                 <><span>{isPageNum}</span> - <span>{isPageNum + 1}</span> / {lastPageNum}</>
@@ -50,7 +49,9 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                         </div>
                     }
                 </> :
-                <div className={`pagerEls ${isEdit ? 'isEditTrue' : 'isEditFalse'}`} onClick={editMode}>
+                <div className={`cursor-pointer ${isEdit ?
+                    'hover:opacity-[0.75]' :
+                    'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-[100%] after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
                     <>
                         {isPageNum === 0 ?
                             <span>{isPageNum + 1}</span> :
@@ -65,50 +66,8 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                     isInputTxt={isInputTxt}
                     setInputTxt={setInputTxt}
                     setPageNum={setPageNum}
-                    PrevPage={PrevPage}
-                    NextPage={NextPage}
                 />
             }
-        </ PageNumberViewWrapper>
+        </ div>
     );
 });
-
-const PageNumberViewWrapper = styled.div`
-font-size: 16px;
-text-align: center;
-padding: 0 16px;
-line-height: 2;
-
-& .pagerEls {
-    cursor: pointer;
-
-    &.isEditTrue {
-        &:hover {
-            opacity: .75;
-        }
-    }
-
-    &.isEditFalse {
-        width: fit-content;
-        margin: auto;
-        position: relative;
-
-        &::after {
-            content: "→";
-            font-size: 14px;
-            position: absolute;
-            top: 50%;
-            left: 100%;
-            transform: translate(50%, -50%);
-            transition: transform .25s;
-        }
-        
-        &:hover {
-            opacity: .75;
-            &::after {
-                transform: translate(80%, -50%);
-            }
-        }
-    }
-}
-`;
