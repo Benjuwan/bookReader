@@ -14,5 +14,5 @@ export const LoadingEl = memo(() => {
         }
     }, []);
 
-    return <section className="grid place-content-center h-[calc(100vh-5em)]"><p ref={loadingElmRef} className="overflow-hidden text-center fixed top-[50%] left-[50%] transform-[translate(-50%,-50%)] leading-[2em] text-1 tracking-[0.25em] lg:text-[16px]">...データを取得中</p></section>
+    return <section className="grid place-content-center h-[calc(100vh-5em)]"><p ref={loadingElmRef} className="overflow-hidden text-center fixed top-[50%] left-[50%] transform-[translate(-50%,-50%)] leading-[2em] text-base tracking-[0.25em]">...データを取得中</p></section>
 });
