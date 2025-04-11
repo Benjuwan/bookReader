@@ -61,7 +61,7 @@ export const PageComponents = memo(() => {
 
     return (
         // 親要素に「perspective」の指定。子要素にも適用。※ 子要素（例：<img>）のみを3D変形する際には「transform: perspective(数値)」を指定。
-        <main className="w-[clamp(20rem,100%,75rem)] mx-auto mt-10 perspective-[1000px] lg:w-[clamp(320px,100%,1200px)]">
+        <main className="w-[clamp(20rem,100%,75rem)] mx-auto mt-10 perspective-[1000px]">
             {loading ? <LoadingEl /> :
                 <section className="WRAPPER_SECTION">
                     <div className={`useSetInputPagerNumber_multiPageWrapper flex justify-center mx-auto p-4 ${isViewPortWidth >= 700 ? 'w-full max-w-[1080px]' : 'w-full max-w-[400px]'}`}>
