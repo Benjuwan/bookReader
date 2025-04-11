@@ -67,6 +67,7 @@ export const SinglePage: FC<EachPageType> = memo((props) => {
     return (
         <div className="relative">
             {/* 前ページボタン（verticalWritingMode true の場合は 次ページボタン）*/}
+            {/* SinglePage コンポーネントではページ送り機能を維持するため h-full を指定 */}
             <button type="button" className="appearance-none rounded-none border-0 bg-transparent cursor-pointer w-1/2 h-full absolute top-[50%] left-0 translate-y-[-50%] z-1 hover:bg-[rgba(0,0,0,.015)]" onClick={handlePrev}>&nbsp;</button>
 
             {/* ページ画像 */}
@@ -80,6 +81,7 @@ export const SinglePage: FC<EachPageType> = memo((props) => {
             />
 
             {/* 次ページボタン（verticalWritingMode true の場合は 前ページボタン）*/}
+            {/* SinglePage コンポーネントではページ送り機能を維持するため h-full を指定 */}
             <button type="button" className="appearance-none rounded-none border-0 bg-transparent cursor-pointer w-1/2 h-full absolute top-[50%] right-0 translate-y-[-50%] z-1 hover:bg-[rgba(0,0,0,.015)]" onClick={handleNext}>&nbsp;</button>
         </div>
     );

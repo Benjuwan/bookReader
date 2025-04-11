@@ -38,7 +38,7 @@ export const MultiPages: FC<EachPageType> = memo((props) => {
                 onClick={handlePrev}
             >
                 <img
-                    className={`useSetInputPagerNumber_prevPage block object-cover h-full duration-250 hover:filter hover:brightness-75 ${verticalWritingMode ? 'origin-left' : 'origin-right'}`}
+                    className={`useSetInputPagerNumber_prevPage block object-cover duration-250 hover:filter hover:brightness-75 ${verticalWritingMode ? 'origin-left' : 'origin-right'}`}
                     src={verticalWritingMode ? NextPage(isPageNum) : PrevPage(isPageNum)}
                     alt={`${documentTitle}の画像 - ${verticalWritingMode ? isPageNum + 1 : isPageNum}ページ目`}
                 />
@@ -48,7 +48,7 @@ export const MultiPages: FC<EachPageType> = memo((props) => {
                 onClick={handleNext}
             >
                 <img
-                    className={`useSetInputPagerNumber_prevPage block object-cover h-full duration-250 hover:filter hover:brightness-75 ${verticalWritingMode ? 'origin-right' : 'origin-left'}`}
+                    className={`useSetInputPagerNumber_prevPage block object-cover duration-250 hover:filter hover:brightness-75 ${verticalWritingMode ? 'origin-right' : 'origin-left'}`}
                     src={verticalWritingMode ? PrevPage(isPageNum) : NextPage(isPageNum)}
                     alt={`${documentTitle}の画像 - ${verticalWritingMode ? isPageNum : isPageNum + 1}ページ目`}
                 />
