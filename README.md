@@ -15,8 +15,8 @@
 - @tailwindcss/vite@4.1.11
 - @types/react-dom@18.3.7
 - @types/react@18.3.23
-- @typescript-eslint/eslint-plugin@8.38.0
-- @typescript-eslint/parser@8.38.0
+- @typescript-eslint/eslint-plugin@8.39.0
+- @typescript-eslint/parser@8.39.0
 - @vitejs/plugin-react@4.7.0
 - eslint-plugin-react-hooks@4.6.2
 - eslint-plugin-react-refresh@0.4.20
@@ -24,7 +24,7 @@
 - react-dom@18.3.1
 - react@18.3.1
 - tailwindcss@4.1.11
-- typescript@5.8.3
+- typescript@5.9.2
 - vite@6.3.5
 
 ## 用途
