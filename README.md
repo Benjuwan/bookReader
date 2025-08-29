@@ -12,18 +12,18 @@
 ![スマートフォンver](readmeimg/gif-002.gif "hero")
 
 ## 技術構成
-- @tailwindcss/vite@4.1.11
+- @tailwindcss/vite@4.1.12
 - @types/react-dom@18.3.7
-- @types/react@18.3.23
-- @typescript-eslint/eslint-plugin@8.39.0
-- @typescript-eslint/parser@8.39.0
+- @types/react@18.3.24
+- @typescript-eslint/eslint-plugin@8.41.0
+- @typescript-eslint/parser@8.41.0
 - @vitejs/plugin-react@4.7.0
 - eslint-plugin-react-hooks@4.6.2
 - eslint-plugin-react-refresh@0.4.20
 - eslint@8.57.1
 - react-dom@18.3.1
 - react@18.3.1
-- tailwindcss@4.1.11
+- tailwindcss@4.1.12
 - typescript@5.9.2
 - vite@6.3.5
 
