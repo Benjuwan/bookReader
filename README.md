@@ -15,18 +15,18 @@
 - @tailwindcss/vite@4.1.16
 - @types/react-dom@19.2.2
 - @types/react@19.2.2
-- @typescript-eslint/eslint-plugin@8.46.2
-- @typescript-eslint/parser@8.46.2
-- @vitejs/plugin-react@5.0.4
-- eslint-plugin-react-hooks@7.0.0
+- @typescript-eslint/eslint-plugin@8.46.3
+- @typescript-eslint/parser@8.46.3
+- @vitejs/plugin-react@5.1.0
+- eslint-plugin-react-hooks@7.0.1
 - eslint-plugin-react-refresh@0.4.24
 - eslint-plugin-react@7.37.5
-- eslint@9.38.0
+- eslint@9.39.1
 - react-dom@19.2.0
 - react@19.2.0
 - tailwindcss@4.1.16
 - typescript@5.9.3
-- vite@7.1.12
+- vite@7.2.1
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧
