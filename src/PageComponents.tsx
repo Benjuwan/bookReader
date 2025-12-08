@@ -33,6 +33,11 @@ export const PageComponents = memo(() => {
     const { WaitLoadingAllImgs } = useWaitLoadingAllImgs();
 
     const thePostsPagination: (pageNum: number) => void = (pageNum: number) => {
+        if (isPageNum + pageNum === 0) {
+            setPageNum(1);
+            return;
+        }
+
         setPageNum((prevPageNum) => prevPageNum + pageNum);
     }
 

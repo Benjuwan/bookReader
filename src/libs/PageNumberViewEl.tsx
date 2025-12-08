@@ -28,7 +28,7 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                     {isPageNum <= 1 || isPageNum === lastPageNum ?
                         <div className={`cursor-pointer ${isEdit ?
                             'hover:opacity-[0.75]' :
-                            'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-[100%] after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
+                            'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-full after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
                             {isPageNum <= 1 &&
                                 <>
                                     {isPageNum === 0 ?
@@ -41,7 +41,7 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                         </div> :
                         <div className={`cursor-pointer ${isEdit ?
                             'hover:opacity-[0.75]' :
-                            'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-[100%] after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
+                            'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-full after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
                             {verticalWritingMode ?
                                 <><span>{isPageNum + 1}</span> - <span>{isPageNum}</span> / {lastPageNum}</> :
                                 <><span>{isPageNum}</span> - <span>{isPageNum + 1}</span> / {lastPageNum}</>
@@ -51,7 +51,7 @@ export const PageNumberViewEl: FC<pageProps> = memo((props) => {
                 </> :
                 <div className={`cursor-pointer ${isEdit ?
                     'hover:opacity-[0.75]' :
-                    'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-[100%] after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
+                    'w-fit mx-auto relative hover:opacity-[0.75] after:content-["→"] after:absolute after:top-[50%] after:left-full after:transform-[translate(50%,-50%)] after:transition after:duration-[0.25s] hover:after:transform-[translate(80%,-50%)]'}`} onClick={editMode}>
                     <>
                         {isPageNum === 0 ?
                             <span>{isPageNum + 1}</span> :

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, memo, useCallback, useMemo } from "react";
+import { ChangeEvent, FC, memo } from "react";
 import { useCheckCorrectNum } from "../hook/useCheckCorrectNum";
 import { useSetInputPagerNumber } from "../hook/useSetInputPagerNumber";
 
@@ -7,7 +7,7 @@ type pagerInputElType = {
     isInputTxt: string | number;
     setInputTxt: React.Dispatch<React.SetStateAction<string | number>>;
     setPageNum: (isPageNumEl: number) => void;
-}
+};
 
 export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
     const { lastPageNum, isInputTxt, setInputTxt, setPageNum } = props;
@@ -15,7 +15,7 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
     const { CheckCorrectNum } = useCheckCorrectNum();
     const { SetInputPagerNumber } = useSetInputPagerNumber();
 
-    const handleInputEntry = useCallback((el: ChangeEvent<HTMLInputElement>) => {
+    const handleInputEntry = (el: ChangeEvent<HTMLInputElement>) => {
         /* 入力内容が数値かつ適正範囲内かどうか判定 */
         CheckCorrectNum(el, lastPageNum);
 
@@ -23,25 +23,19 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
         if (Number(el.target.value) <= lastPageNum) {
             setInputTxt(el.target.value);
         }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isInputTxt]);
+    }
 
     /* ページ数指定でページ移動 */
-    const setInputPagerNumber = useCallback(() => {
+    const setInputPagerNumber = () => {
         SetInputPagerNumber(isInputTxt, lastPageNum, setPageNum);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isInputTxt]);
+    }
 
     /* スクロールトップ */
     const ScrollTop = () => {
         window.scrollTo(0, 0);
     }
 
-    const inputTxtEl: HTMLInputElement | null = useMemo(() => {
-        return document.querySelector('input[type="text"]');
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isInputTxt]);
+    const inputTxtEl: HTMLInputElement | null = document.querySelector('input[type="text"]');
 
     const submitAction: (formEl: ChangeEvent<HTMLFormElement>) => void = (formEl: ChangeEvent<HTMLFormElement>) => {
         formEl.preventDefault();
@@ -61,7 +55,7 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
                     type="submit"
                     value="移動"
                     disabled={isInputTxt.toString().length === 0}
-                    className="w-[clamp(5rem,100%,25rem)] border-none rounded-2 leading-[2.75rem] tracking-[0.25em] text-white bg-[#969696] rounded-none leading-[1.8] my-[0.5em] mx-0 not-disabled:cursor-pointer not-disabled:bg-[#1e2939] md:w-[20%]" />
+                    className="w-[clamp(5rem,100%,25rem)] border-none rounded-2 tracking-[0.25em] text-white bg-[#969696] rounded-none leading-[1.8] my-[0.5em] mx-0 not-disabled:cursor-pointer not-disabled:bg-[#1e2939] md:w-[20%]" />
             </label>
         </form>
     );

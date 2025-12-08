@@ -11,6 +11,12 @@ export const useSetInputPagerNumber = () => {
         setPageAction: (isPageNumEl: number) => string,
         imgEl: HTMLImageElement
     ) => {
+        if (Number(isInputTxt) <= 1) {
+            setPageNum(1);
+            imgEl.setAttribute('src', setPageAction(1));
+            return;
+        }
+
         if (Number(isInputTxt) % 2 === 0) {
             setPageNum(Number(isInputTxt));
             imgEl.setAttribute('src', setPageAction(Number(isInputTxt)));
@@ -32,6 +38,12 @@ export const useSetInputPagerNumber = () => {
         imgEls?.forEach(imgEl => {
             /* スマートフォンでの閲覧：1ページver */
             if (multiPageWrapperEl?.querySelector('.useSetInputPagerNumber_singlePageImg')) {
+                if (Number(isInputTxt) <= 1) {
+                    setPageNum(1);
+                    imgEl.setAttribute('src', PrevPage(1));
+                    return;
+                }
+
                 setPageNum(Number(isInputTxt));
                 imgEl.setAttribute('src', PrevPage(Number(isInputTxt)));
             }
