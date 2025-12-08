@@ -10,9 +10,6 @@ export const FirstPage: FC<EachPageType> = memo((props) => {
 
     const handleNext: (e: SyntheticEvent<HTMLButtonElement>) => void = (e: SyntheticEvent<HTMLButtonElement>) => {
         const nextAction_core: () => void = () => {
-            if (isPageNum === 0) {
-                thePostsPagination(2);
-            }
             thePostsPagination(1);
         }
 
@@ -23,7 +20,7 @@ export const FirstPage: FC<EachPageType> = memo((props) => {
 
     return (
         <button onClick={handleNext} >
-            <img className="block object-cover duration-250 hover:filter hover:brightness-75 w-1/2 max-w-[30rem] mx-auto lg:max-w-[1280px] lg:min-h-[640px]"
+            <img className="block object-cover duration-250 hover:filter hover:brightness-75 w-1/2 max-w-120 mx-auto lg:max-w-7xl lg:min-h-[640px]"
                 src={`${location.origin}${imgSrcPath}${isPageNum === 0 ?
                     isPageNum + 1 : isPageNum}.${extendsType}`
                 }
