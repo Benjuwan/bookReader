@@ -69,7 +69,7 @@ export const PageComponents = memo(() => {
         <main className="w-[clamp(20rem,100%,75rem)] mx-auto mt-10 perspective-[1000px]">
             {loading ? <LoadingEl /> :
                 <section className="WRAPPER_SECTION">
-                    <div className={`useSetInputPagerNumber_multiPageWrapper flex justify-center mx-auto p-4 ${isViewPortWidth >= 700 ? 'w-full max-w-[1080px]' : 'w-full max-w-[400px]'}`}>
+                    <div className={`useSetInputPagerNumber_multiPageWrapper flex justify-center mx-auto p-4 ${isViewPortWidth >= 700 ? 'w-full max-w-270' : 'w-full max-w-100'}`}>
                         {isViewPortWidth >= 700 ?
                             (isPageNum <= 1 || isPageNum >= lastPageNum) ?
                                 <>
