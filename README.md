@@ -1,4 +1,5 @@
 # BookReader
+## 概要
 パンフレットや各種資料、冊子、雑誌などの見開きコンテンツを webブラウザ上で閲覧できるデジタルパンフレット機能です。<br />
 資料ダウンロードやサービス・商品の効果的な販促・宣伝などを考えたときに「カタログや資料をテキストリンクだけで別タブ表示して閲覧してもらうよりも、イメージしやすいブックリーダー形式で表示したほうがファイルダウンロード率や訴求効果が高まるのでは？」と思って制作しました。<br />
 ブラウザ幅が 700px 以下（スマホ閲覧時）では 1ページ表示仕様になります。
@@ -12,21 +13,21 @@
 ![スマートフォンver](readmeimg/gif-002.gif "hero")
 
 ## 技術構成
-- @tailwindcss/vite@4.1.17
+- @tailwindcss/vite@4.1.18
 - @types/react-dom@19.2.3
 - @types/react@19.2.7
-- @typescript-eslint/eslint-plugin@8.48.1
-- @typescript-eslint/parser@8.48.1
-- @vitejs/plugin-react@5.1.1
+- @typescript-eslint/eslint-plugin@8.50.0
+- @typescript-eslint/parser@8.50.0
+- @vitejs/plugin-react@5.1.2
 - eslint-plugin-react-hooks@7.0.1
-- eslint-plugin-react-refresh@0.4.24
+- eslint-plugin-react-refresh@0.4.25
 - eslint-plugin-react@7.37.5
-- eslint@9.39.1
-- react-dom@19.2.1
-- react@19.2.1
-- tailwindcss@4.1.17
+- eslint@9.39.2
+- react-dom@19.2.3
+- react@19.2.3
+- tailwindcss@4.1.18
 - typescript@5.9.3
-- vite@7.2.6
+- vite@7.3.0
 
 ## 用途
 - パンフレットや資料といった各種ドキュメントの閲覧
@@ -66,20 +67,3 @@
     ページ数入力で任意のページへ飛べます。入力欄は**数値以外受け付けず**、**1 〜 最終ページ番号の範囲内で機能**します。
     - 画像をクリックでの書き換え：`src/hook/usePagination.ts`の `PrevPage` と `NextPage`メソッド
     - ページ数入力後のページジャンプ：`src/hook/useSetInputPagerNumber.ts` の `SetInputPagerNumber`メソッド
-
-- PDFから画像の書き出し + 一括リネームの方法（Mac）
-<details>
-<summary>PDFから画像の書き出し + 一括リネームの方法（Mac）</summary>
-
-1. Adobe AcrobatでPDFから画像の書き出し方法
-![Adobe AcrobatでPDFから画像の書き出し](readmeimg/0001-min.png "hero")
-
-2. 書き出し画像を一括リネーム（Mac）：画像を全選択して「右クリック」 - 「名称変更」 
-![書き出し画像を一括リネーム（Mac）：画像を全選択して「右クリック」 - 「名称変更」](readmeimg/0002-min.png "hero")
-
-- 画像のファイルネームを任意の形へ書き換えたい場合：「フォーマット」を選択
-![画像のファイルネームを任意の形へ書き換えたい場合「フォーマット」を選択](readmeimg/0003-min.png "hero")
-
-- 画像のファイルネームの一部を変更したい場合：「テキストを置き換える」を選択
-![画像のファイルネームの一部を変更したい場合「テキストを置き換える」を選択](readmeimg/0004-min.png "hero")
-</details>
