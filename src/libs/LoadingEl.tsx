@@ -23,7 +23,7 @@ export const LoadingEl = memo(({ setLoading }: { setLoading: Dispatch<SetStateAc
         return () => {
             clearTimeout(counterId);
         }
-    }, []);
+    }, [setLoading]);
 
     return <section className="grid place-content-center h-[calc(100vh-5em)]"><p ref={loadingElmRef} className="overflow-hidden text-center fixed top-[50%] left-[50%] transform-[translate(-50%,-50%)] leading-[2em] text-base tracking-[0.25em]">...データを取得中</p></section>
 });
