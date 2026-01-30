@@ -1,21 +1,21 @@
 # BookReader
 ## 概要
-パンフレットや各種資料、冊子、雑誌などの見開きコンテンツを webブラウザ上で閲覧できるデジタルパンフレット機能です。<br />
-資料ダウンロードやサービス・商品の効果的な販促・宣伝などを考えたときに「カタログや資料をテキストリンクだけで別タブ表示して閲覧してもらうよりも、イメージしやすいブックリーダー形式で表示したほうがファイルダウンロード率や訴求効果が高まるのでは？」と思って制作しました。<br />
+パンフレットや各種資料、冊子、雑誌などの見開きコンテンツを webブラウザ上で閲覧できるデジタルパンフレット機能です。  
+資料ダウンロードやサービス・商品の効果的な販促・宣伝などを考えたときに「カタログや資料をテキストリンクだけで別タブ表示して閲覧してもらうよりも、イメージしやすいブックリーダー形式で表示したほうがファイルダウンロード率や訴求効果が高まるのでは？」と思って制作しました。  
 ブラウザ幅が 700px 以下（スマホ閲覧時）では 1ページ表示仕様になります。
 
 > [!NOTE] 
-> サンプルドキュメントとして[内閣サイバーセキュリティセンター（NISC）](https://security-portal.nisc.go.jp/)が制作した[「インターネットの安全・安心ハンドブック - NISC」](https://security-portal.nisc.go.jp/guidance/handbook.html)を使用させていただいております。<br />
+> サンプルドキュメントとして[内閣サイバーセキュリティセンター（NISC）](https://security-portal.nisc.go.jp/)が制作した[「インターネットの安全・安心ハンドブック - NISC」](https://security-portal.nisc.go.jp/guidance/handbook.html)を使用させていただいております。  
 > BookReader（当リポジトリ）では、サンプルドキュメントのため一部の画像（100ページまで）しか扱っていませんが PDF は全ページ閲覧できるようになっています。
 
-- （左）大きいディスプレイver、（右）スマートフォンver <br />
+- （左）大きいディスプレイver、（右）スマートフォンver   
 ![大きいディスプレイver](readmeimg/gif-001.gif "hero")
 ![スマートフォンver](readmeimg/gif-002.gif "hero")
 
 ## 技術構成
 - @tailwindcss/vite@4.1.18
 - @types/react-dom@19.2.3
-- @types/react@19.2.9
+- @types/react@19.2.10
 - @typescript-eslint/eslint-plugin@8.54.0
 - @typescript-eslint/parser@8.54.0
 - @vitejs/plugin-react@5.1.2
@@ -36,12 +36,12 @@
 
 ## 各種設定
 - ドキュメントのPDFファイルは`src/assets`ディレクトリに、ドキュメントの各ページ画像は`public/catalog-img`ディレクトリに置いてください。
-- 対象ドキュメントが **縦書き（左開き）** の場合<br />
+- 対象ドキュメントが **縦書き（左開き）** の場合  
 `src/PageComponents.tsx`の `const verticalWritingMode: boolean = false;` の値を `true`に変更してください。
 
 ## ビルド時（`npm run build`）の注意事項
 1. 特定のディレクトリ or サブディレクトリに格納する場合
-    - `vite.config.ts`の `base:` 箇所にパスを指定<br />
+    - `vite.config.ts`の `base:` 箇所にパスを指定  
     例：example ディレクトリ内の book-reader ディレクトリ下に置く場合
     ```
     base: '/example/book-reader',
@@ -63,7 +63,7 @@
 
 ## 補足事項
 - 仕組み
-    画像をクリックで`img`の`src`と`alt`を随時書き換えています。ページめくりの表現はCSS（`src/index.css`）の`animation`です。<br />
+    画像をクリックで`img`の`src`と`alt`を随時書き換えています。ページめくりの表現はCSS（`src/index.css`）の`animation`です。  
     ページ数入力で任意のページへ飛べます。入力欄は**数値以外受け付けず**、**1 〜 最終ページ番号の範囲内で機能**します。
     - 画像をクリックでの書き換え：`src/hook/usePagination.ts`の `PrevPage` と `NextPage`メソッド
     - ページ数入力後のページジャンプ：`src/hook/useSetInputPagerNumber.ts` の `SetInputPagerNumber`メソッド
