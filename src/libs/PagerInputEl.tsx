@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, memo } from "react";
+import { SyntheticEvent, FC, memo } from "react";
 import { useCheckCorrectNum } from "../hook/useCheckCorrectNum";
 import { useSetInputPagerNumber } from "../hook/useSetInputPagerNumber";
 
@@ -15,13 +15,13 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
     const { CheckCorrectNum } = useCheckCorrectNum();
     const { SetInputPagerNumber } = useSetInputPagerNumber();
 
-    const handleInputEntry = (el: ChangeEvent<HTMLInputElement>) => {
+    const handleInputEntry = (el: SyntheticEvent<HTMLInputElement>) => {
         /* 入力内容が数値かつ適正範囲内かどうか判定 */
         CheckCorrectNum(el, lastPageNum);
 
         /* lastPageNum 以上の数値は入力不可 */
-        if (Number(el.target.value) <= lastPageNum) {
-            setInputTxt(el.target.value);
+        if (Number(el.currentTarget.value) <= lastPageNum) {
+            setInputTxt(el.currentTarget.value);
         }
     }
 
@@ -37,7 +37,7 @@ export const PagerInputEl: FC<pagerInputElType> = memo((props) => {
 
     const inputTxtEl: HTMLInputElement | null = document.querySelector('input[type="text"]');
 
-    const submitAction: (formEl: ChangeEvent<HTMLFormElement>) => void = (formEl: ChangeEvent<HTMLFormElement>) => {
+    const submitAction: (formEl: SyntheticEvent<HTMLFormElement>) => void = (formEl: SyntheticEvent<HTMLFormElement>) => {
         formEl.preventDefault();
         if (inputTxtEl && inputTxtEl.value.length > 0) {
             setInputPagerNumber();
